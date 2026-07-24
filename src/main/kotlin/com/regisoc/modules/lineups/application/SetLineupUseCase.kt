@@ -9,9 +9,9 @@ import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
 
 data class SetLineupCommand(
-    val matchId: String,
-    val clubId: String,
-    val playerIds: List<String>
+    val matchId: Long,
+    val clubId: Long,
+    val playerIds: List<Long>
 )
 
 @Service

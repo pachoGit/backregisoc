@@ -4,7 +4,7 @@ import com.regisoc.modules.clubs.domain.Club
 import java.time.LocalDateTime
 
 data class ClubResponse(
-    val id: String,
+    val id: Long,
     val name: String,
     val foundedYear: Int?,
     val crestUrl: String?,

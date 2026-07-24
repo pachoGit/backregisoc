@@ -11,10 +11,10 @@ class MatchLineupRepositoryImpl(
 ) : MatchLineupRepository {
     override fun save(lineup: MatchLineup): MatchLineup = jpaRepository.save(lineup)
     override fun saveAll(lineups: List<MatchLineup>): List<MatchLineup> = jpaRepository.saveAll(lineups)
-    override fun findById(id: String): Optional<MatchLineup> = jpaRepository.findById(id)
-    override fun findAllByMatchId(matchId: String): List<MatchLineup> = jpaRepository.findAllByMatchId(matchId)
-    override fun findAllByMatchIdAndClubId(matchId: String, clubId: String): List<MatchLineup> =
+    override fun findById(id: Long): Optional<MatchLineup> = jpaRepository.findById(id)
+    override fun findAllByMatchId(matchId: Long): List<MatchLineup> = jpaRepository.findAllByMatchId(matchId)
+    override fun findAllByMatchIdAndClubId(matchId: Long, clubId: Long): List<MatchLineup> =
         jpaRepository.findAllByMatchIdAndClubId(matchId, clubId)
-    override fun deleteByMatchIdAndClubId(matchId: String, clubId: String) =
+    override fun deleteByMatchIdAndClubId(matchId: Long, clubId: Long) =
         jpaRepository.deleteByMatchIdAndClubId(matchId, clubId)
 }

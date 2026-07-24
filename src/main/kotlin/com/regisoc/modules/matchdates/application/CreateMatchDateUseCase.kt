@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 import java.time.LocalDate
 
 data class CreateMatchDateCommand(
-    val eventId: String,
+    val eventId: Long,
     val name: String,
     val date: LocalDate
 )

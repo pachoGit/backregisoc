@@ -6,5 +6,5 @@ import org.springframework.stereotype.Service
 
 @Service
 class GetMatchDatesUseCase(private val repository: MatchDateRepository) {
-    fun findByEvent(eventId: String): List<MatchDate> = repository.findAllByEventId(eventId)
+    fun findByEvent(eventId: Long): List<MatchDate> = repository.findAllByEventId(eventId)
 }

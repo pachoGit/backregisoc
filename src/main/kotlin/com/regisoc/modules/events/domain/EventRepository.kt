@@ -23,7 +23,7 @@ interface EventRepository {
      * @param id Identificador único del evento.
      * @return Un [Optional] que contiene el evento si existe, o vacío si no se encuentra.
      */
-    fun findById(id: String): Optional<Event>
+    fun findById(id: Long): Optional<Event>
 
     /**
      * Obtiene todos los eventos registrados.

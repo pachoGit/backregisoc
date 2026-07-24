@@ -5,10 +5,10 @@ import com.regisoc.modules.matches.domain.MatchStatus
 import java.time.LocalDateTime
 
 data class MatchResponse(
-    val id: String,
-    val matchDateId: String,
-    val homeClubId: String,
-    val awayClubId: String,
+    val id: Long,
+    val matchDateId: Long,
+    val homeClubId: Long,
+    val awayClubId: Long,
     val scheduledTime: LocalDateTime,
     val status: MatchStatus,
     val createdAt: LocalDateTime,

@@ -10,7 +10,7 @@ class EventRepositoryImpl(
     private val jpaRepository: EventJpaRepository
 ) : EventRepository {
     override fun save(event: Event): Event = jpaRepository.save(event)
-    override fun findById(id: String): Optional<Event> = jpaRepository.findById(id)
+    override fun findById(id: Long): Optional<Event> = jpaRepository.findById(id)
     override fun findAll(): List<Event> = jpaRepository.findAll()
     override fun delete(event: Event) = jpaRepository.delete(event)
 }

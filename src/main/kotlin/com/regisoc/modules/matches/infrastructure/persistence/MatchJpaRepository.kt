@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
 
-interface MatchJpaRepository : JpaRepository<Match, String> {
-    fun findAllByMatchDateId(matchDateId: String): List<Match>
+interface MatchJpaRepository : JpaRepository<Match, Long> {
+    fun findAllByMatchDateId(matchDateId: Long): List<Match>
 
     @Query("SELECT m FROM Match m WHERE m.homeClub.id = :clubId OR m.awayClub.id = :clubId")
-    fun findByClubId(@Param("clubId") clubId: String): List<Match>
+    fun findByClubId(@Param("clubId") clubId: Long): List<Match>
 }

@@ -4,10 +4,10 @@ import com.regisoc.modules.lineups.domain.MatchLineup
 import java.time.LocalDateTime
 
 data class LineupItemResponse(
-    val id: String,
-    val matchId: String,
-    val clubId: String,
-    val playerId: String,
+    val id: Long,
+    val matchId: Long,
+    val clubId: Long,
+    val playerId: Long,
     val createdAt: LocalDateTime
 ) {
     companion object {

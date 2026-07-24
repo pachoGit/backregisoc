@@ -37,7 +37,7 @@ class EventController(
 
     @PostMapping("/{eventId}/registrations")
     fun registerClub(
-        @PathVariable eventId: String,
+        @PathVariable eventId: Long,
         @Valid @RequestBody request: RegisterClubRequest
     ): ResponseEntity<EventRegistrationResponse> {
         val command = RegisterClubCommand(eventId = eventId, clubId = request.clubId)
@@ -46,7 +46,7 @@ class EventController(
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: String): ResponseEntity<EventResponse> {
+    fun getById(@PathVariable id: Long): ResponseEntity<EventResponse> {
         val event = getEventUseCase.findById(id)
         return ResponseEntity.ok(EventResponse.from(event))
     }
@@ -58,7 +58,7 @@ class EventController(
     }
 
     @GetMapping("/{eventId}/registrations")
-    fun getRegistrations(@PathVariable eventId: String): ResponseEntity<List<EventRegistrationResponse>> {
+    fun getRegistrations(@PathVariable eventId: Long): ResponseEntity<List<EventRegistrationResponse>> {
         val registrations = getEventUseCase.getRegistrations(eventId)
         return ResponseEntity.ok(registrations.map { EventRegistrationResponse.from(it) })
     }

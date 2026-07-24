@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class GetLineupUseCase(private val repository: MatchLineupRepository) {
-    fun getMatchLineups(matchId: String): List<MatchLineup> =
+    fun getMatchLineups(matchId: Long): List<MatchLineup> =
         repository.findAllByMatchId(matchId)
 
-    fun getClubLineup(matchId: String, clubId: String): List<MatchLineup> =
+    fun getClubLineup(matchId: Long, clubId: Long): List<MatchLineup> =
         repository.findAllByMatchIdAndClubId(matchId, clubId)
 }

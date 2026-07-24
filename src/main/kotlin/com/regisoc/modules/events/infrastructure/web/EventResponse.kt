@@ -6,7 +6,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class EventResponse(
-    val id: String,
+    val id: Long,
     val name: String,
     val description: String?,
     val startDate: LocalDate,

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull
 import java.time.LocalDate
 
 data class CreateMatchDateRequest(
-    @field:NotBlank val eventId: String,
+    @field:NotBlank val eventId: Long,
     @field:NotBlank val name: String,
     @field:NotNull val date: LocalDate
 )

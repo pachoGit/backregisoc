@@ -12,16 +12,16 @@ class GetEventUseCase(
     private val eventRepository: EventRepository,
     private val registrationRepository: EventRegistrationRepository
 ) {
-    fun findById(id: String): Event {
+    fun findById(id: Long): Event {
         return eventRepository.findById(id)
             .orElseThrow { EntityNotFoundException("Event not found with id: $id") }
     }
 
     fun findAll(): List<Event> = eventRepository.findAll()
 
-    fun getRegistrations(eventId: String): List<EventRegistration> =
+    fun getRegistrations(eventId: Long): List<EventRegistration> =
         registrationRepository.findByEventId(eventId)
 
-    fun getClubRegistrations(clubId: String): List<EventRegistration> =
+    fun getClubRegistrations(clubId: Long): List<EventRegistration> =
         registrationRepository.findByClubId(clubId)
 }

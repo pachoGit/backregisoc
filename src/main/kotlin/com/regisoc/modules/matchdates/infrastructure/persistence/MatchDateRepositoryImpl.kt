@@ -10,7 +10,7 @@ class MatchDateRepositoryImpl(
     private val jpaRepository: MatchDateJpaRepository
 ) : MatchDateRepository {
     override fun save(matchDate: MatchDate): MatchDate = jpaRepository.save(matchDate)
-    override fun findById(id: String): Optional<MatchDate> = jpaRepository.findById(id)
-    override fun findAllByEventId(eventId: String): List<MatchDate> = jpaRepository.findAllByEventId(eventId)
+    override fun findById(id: Long): Optional<MatchDate> = jpaRepository.findById(id)
+    override fun findAllByEventId(eventId: Long): List<MatchDate> = jpaRepository.findAllByEventId(eventId)
     override fun delete(matchDate: MatchDate) = jpaRepository.delete(matchDate)
 }

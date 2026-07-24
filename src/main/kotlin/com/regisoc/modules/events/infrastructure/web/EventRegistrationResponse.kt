@@ -4,9 +4,9 @@ import com.regisoc.modules.events.domain.EventRegistration
 import java.time.LocalDateTime
 
 data class EventRegistrationResponse(
-    val id: String,
-    val eventId: String,
-    val clubId: String,
+    val id: Long,
+    val eventId: Long,
+    val clubId: Long,
     val registeredAt: LocalDateTime
 ) {
     companion object {

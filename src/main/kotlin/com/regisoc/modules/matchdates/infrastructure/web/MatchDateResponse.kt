@@ -5,8 +5,8 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class MatchDateResponse(
-    val id: String,
-    val eventId: String,
+    val id: Long,
+    val eventId: Long,
     val name: String,
     val date: LocalDate,
     val createdAt: LocalDateTime,

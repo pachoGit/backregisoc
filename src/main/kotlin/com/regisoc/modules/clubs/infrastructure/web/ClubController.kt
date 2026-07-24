@@ -28,7 +28,7 @@ class ClubController(
     }
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: String, @Valid @RequestBody request: UpdateClubRequest): ResponseEntity<Void> {
+    fun update(@PathVariable id: Long, @Valid @RequestBody request: UpdateClubRequest): ResponseEntity<Void> {
         val command = UpdateClubCommand(
             id = id,
             name = request.name,
@@ -41,7 +41,7 @@ class ClubController(
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: String): ResponseEntity<ClubResponse> {
+    fun getById(@PathVariable id: Long): ResponseEntity<ClubResponse> {
         val club = getClubUseCase.findById(id)
         return ResponseEntity.ok(ClubResponse.from(club))
     }
@@ -53,7 +53,7 @@ class ClubController(
     }
 
     @DeleteMapping("/{id}")
-    fun delete(@PathVariable id: String): ResponseEntity<Void> {
+    fun delete(@PathVariable id: Long): ResponseEntity<Void> {
         deleteClubUseCase.execute(id)
         return ResponseEntity.noContent().build()
     }

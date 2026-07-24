@@ -31,7 +31,7 @@ class MatchDateController(
     }
 
     @GetMapping("/by-event/{eventId}")
-    fun getByEvent(@PathVariable eventId: String): ResponseEntity<List<MatchDateResponse>> {
+    fun getByEvent(@PathVariable eventId: Long): ResponseEntity<List<MatchDateResponse>> {
         val matchDates = getMatchDatesUseCase.findByEvent(eventId)
         return ResponseEntity.ok(matchDates.map { MatchDateResponse.from(it) })
     }

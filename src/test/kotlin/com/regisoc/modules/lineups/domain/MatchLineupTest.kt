@@ -30,7 +30,14 @@ class MatchLineupTest {
             scheduledTime = LocalDateTime.now(),
             status = MatchStatus.SCHEDULED
         )
-        val player = Player(club = club, name = "John Doe")
+        val player = Player(
+            club = club,
+            firstName = "John",
+            lastName = "Doe",
+            documentNumber = "12345678",
+            age = 25,
+            dateOfBirth = LocalDate.of(1999, 1, 1)
+        )
 
         val lineup = MatchLineup(match = match, club = club, player = player)
         assertNotNull(lineup.id)

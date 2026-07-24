@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service
 
 @Service
 class GetPlayerUseCase(private val repository: PlayerRepository) {
-    fun findById(id: String): Player {
+    fun findById(id: Long): Player {
         return repository.findById(id)
             .orElseThrow { EntityNotFoundException("Player not found with id: $id") }
     }
 
-    fun findByClub(clubId: String): List<Player> = repository.findAllByClubId(clubId)
+    fun findByClub(clubId: Long): List<Player> = repository.findAllByClubId(clubId)
 }

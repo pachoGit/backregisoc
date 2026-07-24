@@ -24,7 +24,7 @@ interface PlayerRepository {
      * @param id Identificador único del jugador.
      * @return Un [Optional] que contiene el jugador si existe, o vacío si no se encuentra.
      */
-    fun findById(id: String): Optional<Player>
+    fun findById(id: Long): Optional<Player>
 
     /**
      * Obtiene todos los jugadores de un club específico.
@@ -32,7 +32,7 @@ interface PlayerRepository {
      * @param clubId Identificador del club.
      * @return Lista de jugadores pertenecientes al club.
      */
-    fun findAllByClubId(clubId: String): List<Player>
+    fun findAllByClubId(clubId: Long): List<Player>
 
     /**
      * Elimina un jugador del repositorio.

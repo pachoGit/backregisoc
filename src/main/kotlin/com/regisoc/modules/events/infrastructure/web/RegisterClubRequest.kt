@@ -1,7 +1,7 @@
 package com.regisoc.modules.events.infrastructure.web
 
-import jakarta.validation.constraints.NotBlank
+import jakarta.validation.constraints.NotNull
 
 data class RegisterClubRequest(
-    @field:NotBlank val clubId: String
+    @field:NotNull val clubId: Long
 )

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
 data class CreateMatchCommand(
-    val matchDateId: String,
-    val homeClubId: String,
-    val awayClubId: String,
+    val matchDateId: Long,
+    val homeClubId: Long,
+    val awayClubId: Long,
     val scheduledTime: LocalDateTime
 )
 

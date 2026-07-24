@@ -10,7 +10,7 @@ class ClubRepositoryImpl(
     private val jpaRepository: ClubJpaRepository
 ) : ClubRepository {
     override fun save(club: Club): Club = jpaRepository.save(club)
-    override fun findById(id: String): Optional<Club> = jpaRepository.findById(id)
+    override fun findById(id: Long): Optional<Club> = jpaRepository.findById(id)
     override fun findAll(): List<Club> = jpaRepository.findAll()
     override fun findByNameContaining(name: String): List<Club> = jpaRepository.findByNameContaining(name)
     override fun delete(club: Club) = jpaRepository.delete(club)

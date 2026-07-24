@@ -33,8 +33,8 @@ class LineupController(
 
     @GetMapping("/match/{matchId}")
     fun getMatchLineups(
-        @PathVariable matchId: String,
-        @RequestParam(required = false) clubId: String?
+        @PathVariable matchId: Long,
+        @RequestParam(required = false) clubId: Long?
     ): ResponseEntity<List<LineupItemResponse>> {
         val lineups = if (clubId != null) {
             getLineupUseCase.getClubLineup(matchId, clubId)

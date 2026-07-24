@@ -32,7 +32,7 @@ interface MatchLineupRepository {
      * @param id Identificador único de la alineación.
      * @return Un [Optional] que contiene la alineación si existe, o vacío si no se encuentra.
      */
-    fun findById(id: String): Optional<MatchLineup>
+    fun findById(id: Long): Optional<MatchLineup>
 
     /**
      * Obtiene todas las alineaciones de un partido específico.
@@ -40,7 +40,7 @@ interface MatchLineupRepository {
      * @param matchId Identificador del partido.
      * @return Lista de alineaciones del partido.
      */
-    fun findAllByMatchId(matchId: String): List<MatchLineup>
+    fun findAllByMatchId(matchId: Long): List<MatchLineup>
 
     /**
      * Obtiene las alineaciones de un club específico dentro de un partido.
@@ -49,7 +49,7 @@ interface MatchLineupRepository {
      * @param clubId Identificador del club.
      * @return Lista de alineaciones del club en ese partido.
      */
-    fun findAllByMatchIdAndClubId(matchId: String, clubId: String): List<MatchLineup>
+    fun findAllByMatchIdAndClubId(matchId: Long, clubId: Long): List<MatchLineup>
 
     /**
      * Elimina todas las alineaciones de un club en un partido específico.
@@ -57,5 +57,5 @@ interface MatchLineupRepository {
      * @param matchId Identificador del partido.
      * @param clubId Identificador del club.
      */
-    fun deleteByMatchIdAndClubId(matchId: String, clubId: String)
+    fun deleteByMatchIdAndClubId(matchId: Long, clubId: Long)
 }

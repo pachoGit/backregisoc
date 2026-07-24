@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class DeleteClubUseCase(private val repository: ClubRepository) {
-    fun execute(id: String) {
+    fun execute(id: Long) {
         val club = repository.findById(id)
             .orElseThrow { EntityNotFoundException("Club not found with id: $id") }
         club.deactivate()

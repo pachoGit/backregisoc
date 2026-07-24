@@ -24,7 +24,7 @@ interface MatchRepository {
      * @param id Identificador único del partido.
      * @return Un [Optional] que contiene el partido si existe, o vacío si no se encuentra.
      */
-    fun findById(id: String): Optional<Match>
+    fun findById(id: Long): Optional<Match>
 
     /**
      * Obtiene todos los partidos de una jornada específica.
@@ -32,7 +32,7 @@ interface MatchRepository {
      * @param matchDateId Identificador de la jornada.
      * @return Lista de partidos de esa jornada.
      */
-    fun findAllByMatchDateId(matchDateId: String): List<Match>
+    fun findAllByMatchDateId(matchDateId: Long): List<Match>
 
     /**
      * Obtiene todos los partidos en los que participa un club (ya sea como local o visitante).
@@ -40,7 +40,7 @@ interface MatchRepository {
      * @param clubId Identificador del club.
      * @return Lista de partidos del club.
      */
-    fun findByClubId(clubId: String): List<Match>
+    fun findByClubId(clubId: Long): List<Match>
 
     /**
      * Elimina un partido del repositorio.

@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
+import jakarta.persistence.Column
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -24,8 +25,11 @@ import java.time.LocalDateTime
 @Table(name = "players")
 class Player(
     club: Club,
-    name: String,
-    dateOfBirth: LocalDate? = null,
+    firstName: String,
+    lastName: String,
+    documentNumber: String,
+    age: Int,
+    dateOfBirth: LocalDate,
     position: PlayerPosition? = null,
     photoUrl: String? = null,
     documentFrontUrl: String? = null,
@@ -33,15 +37,38 @@ class Player(
 ) : BaseEntity() {
 
     /**
-     * @property name Nombre completo del jugador.
+     * @property firstName Nombre completo del jugador.
      */
-    var name: String = name
+    @Column(nullable=false)
+    var firstName: String = firstName
         protected set
 
     /**
-     * @property dateOfBirth Fecha de nacimiento del jugador (opcional).
+     * @property lastName Apellido completo del jugador.
      */
-    var dateOfBirth: LocalDate? = dateOfBirth
+    @Column(nullable=false)
+    var lastName: String = lastName
+        protected set
+
+    /**
+     * @property documentNumber Numero de documento del jugador.
+     */
+    @Column(nullable=false)
+    var documentNumber: String = documentNumber
+        protected set
+
+    /**
+     * @property age Edad del jugador.
+     */
+    @Column(nullable=false)
+    var age: Int = age
+        protected set
+
+    /**
+     * @property dateOfBirth Fecha de nacimiento del jugador.
+     */
+    @Column(nullable=false)
+    var dateOfBirth: LocalDate = dateOfBirth
         protected set
 
     /**
@@ -54,18 +81,21 @@ class Player(
     /**
      * @property photoUrl URL pública de la foto del jugador (opcional).
      */
+    @Column(columnDefinition="text")
     var photoUrl: String? = photoUrl
         protected set
 
     /**
      * @property documentFrontUrl URL pública de la imagen frontal del documento de identidad (opcional).
      */
+    @Column(columnDefinition="text")
     var documentFrontUrl: String? = documentFrontUrl
         protected set
 
     /**
      * @property documentBackUrl URL pública de la imagen posterior del documento de identidad (opcional).
      */
+    @Column(columnDefinition="text")
     var documentBackUrl: String? = documentBackUrl
         protected set
 
@@ -92,14 +122,20 @@ class Player(
      * @param documentBackUrl Nueva URL del dorso del documento (puede ser `null`).
      */
     fun update(
-        name: String,
-        dateOfBirth: LocalDate?,
+        firstName: String,
+        lastName: String,
+        documentNumber: String,
+        age: Int,
+        dateOfBirth: LocalDate,
         position: PlayerPosition?,
         photoUrl: String?,
         documentFrontUrl: String?,
         documentBackUrl: String?
     ) {
-        this.name = name
+        this.firstName = firstName
+        this.lastName = lastName
+        this.documentNumber = documentNumber
+        this.age = age
         this.dateOfBirth = dateOfBirth
         this.position = position
         this.photoUrl = photoUrl

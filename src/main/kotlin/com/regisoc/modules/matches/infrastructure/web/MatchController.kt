@@ -33,15 +33,15 @@ class MatchController(
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: String): ResponseEntity<MatchResponse> {
+    fun getById(@PathVariable id: Long): ResponseEntity<MatchResponse> {
         val match = getMatchUseCase.findById(id)
         return ResponseEntity.ok(MatchResponse.from(match))
     }
 
     @GetMapping
     fun getAll(
-        @RequestParam(required = false) matchDateId: String?,
-        @RequestParam(required = false) clubId: String?
+        @RequestParam(required = false) matchDateId: Long?,
+        @RequestParam(required = false) clubId: Long?
     ): ResponseEntity<List<MatchResponse>> {
         val matches = when {
             matchDateId != null -> getMatchUseCase.findByMatchDate(matchDateId)

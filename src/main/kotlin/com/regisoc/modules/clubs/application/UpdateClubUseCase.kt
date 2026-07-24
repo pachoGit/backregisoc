@@ -5,7 +5,7 @@ import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
 
 data class UpdateClubCommand(
-    val id: String,
+    val id: Long,
     val name: String,
     val foundedYear: Int?,
     val crestUrl: String?,

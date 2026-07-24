@@ -9,6 +9,7 @@ import jakarta.persistence.Entity
 import jakarta.persistence.FetchType
 import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
+import jakarta.persistence.Column
 import java.time.LocalDateTime
 
 /**
@@ -16,14 +17,6 @@ import java.time.LocalDateTime
  *
  * Almacena la información básica del club, incluyendo su nombre, año de fundación,
  * escudo, descripción y estado de actividad.
- *
- * @property name Nombre oficial del club deportivo.
- * @property foundedYear Año de fundación del club (opcional).
- * @property crestUrl URL pública del escudo o emblema del club (opcional).
- * @property description Descripción o reseña histórica del club (opcional).
- * @property createdBy Identificador del usuario que creó el registro del club.
- * @property isActive Indica si el club se encuentra activo en el sistema (por defecto `true`).
- *                     Un club desactivado no debería aparecer en selecciones ni partidos activos.
  */
 @Entity
 @Table(name = "clubs")
@@ -35,16 +28,43 @@ class Club(
     createdBy: String,
     isActive: Boolean = true
 ) : BaseEntity() {
+
+    /**
+     * @property name Nombre oficial del club deportivo.
+     */
     var name: String = name
         protected set
+
+    /**
+     * @property foundedYear Año de fundación del club (opcional).
+     */
     var foundedYear: Int? = foundedYear
         protected set
+
+    /**
+     * @property crestUrl URL pública del escudo o emblema del club (opcional).
+     */
+
+    @Column(columnDefinition="text")
     var crestUrl: String? = crestUrl
         protected set
+
+    /**
+     * @property description Descripción o reseña histórica del club (opcional).
+     */
     var description: String? = description
         protected set
+
+    /**
+     * @property createdBy Identificador del usuario que creó el registro del club.
+     */
     var createdBy: String = createdBy
         protected set
+
+    /**
+     * @property isActive Indica si el club se encuentra activo en el sistema (por defecto `true`).
+     *                     Un club desactivado no debería aparecer en selecciones ni partidos activos.
+     */
     var isActive: Boolean = isActive
         protected set
 

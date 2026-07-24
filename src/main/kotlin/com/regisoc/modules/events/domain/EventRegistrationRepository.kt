@@ -24,7 +24,7 @@ interface EventRegistrationRepository {
      * @param id Identificador único de la inscripción.
      * @return Un [Optional] que contiene la inscripción si existe, o vacío si no se encuentra.
      */
-    fun findById(id: String): Optional<EventRegistration>
+    fun findById(id: Long): Optional<EventRegistration>
 
     /**
      * Obtiene todas las inscripciones de un evento específico.
@@ -32,7 +32,7 @@ interface EventRegistrationRepository {
      * @param eventId Identificador del evento.
      * @return Lista de inscripciones asociadas al evento.
      */
-    fun findByEventId(eventId: String): List<EventRegistration>
+    fun findByEventId(eventId: Long): List<EventRegistration>
 
     /**
      * Busca la inscripción de un club específico en un evento específico.
@@ -41,7 +41,7 @@ interface EventRegistrationRepository {
      * @param clubId Identificador del club.
      * @return Un [Optional] que contiene la inscripción si existe, o vacío si el club no está inscrito en ese evento.
      */
-    fun findByEventIdAndClubId(eventId: String, clubId: String): Optional<EventRegistration>
+    fun findByEventIdAndClubId(eventId: Long, clubId: Long): Optional<EventRegistration>
 
     /**
      * Obtiene todas las inscripciones de un club (en todos los eventos en los que participa).
@@ -49,7 +49,7 @@ interface EventRegistrationRepository {
      * @param clubId Identificador del club.
      * @return Lista de inscripciones del club.
      */
-    fun findByClubId(clubId: String): List<EventRegistration>
+    fun findByClubId(clubId: Long): List<EventRegistration>
 
     /**
      * Elimina una inscripción del repositorio.

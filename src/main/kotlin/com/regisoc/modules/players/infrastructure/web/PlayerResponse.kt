@@ -6,10 +6,13 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 
 data class PlayerResponse(
-    val id: String,
-    val clubId: String,
-    val name: String,
-    val dateOfBirth: LocalDate?,
+    val id: Long,
+    val clubId: Long,
+    val firstName: String,
+    val lastName: String,
+    val documentNumber: String,
+    val age: Int,
+    val dateOfBirth: LocalDate,
     val position: PlayerPosition?,
     val photoUrl: String?,
     val documentFrontUrl: String?,
@@ -21,7 +24,10 @@ data class PlayerResponse(
         fun from(player: Player) = PlayerResponse(
             id = player.id,
             clubId = player.club.id,
-            name = player.name,
+            firstName = player.firstName,
+            lastName = player.lastName,
+            documentNumber = player.documentNumber,
+            age = player.age,
             dateOfBirth = player.dateOfBirth,
             position = player.position,
             photoUrl = player.photoUrl,

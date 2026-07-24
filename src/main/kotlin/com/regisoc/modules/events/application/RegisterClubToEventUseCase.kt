@@ -8,8 +8,8 @@ import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
 
 data class RegisterClubCommand(
-    val eventId: String,
-    val clubId: String
+    val eventId: Long,
+    val clubId: Long
 )
 
 @Service

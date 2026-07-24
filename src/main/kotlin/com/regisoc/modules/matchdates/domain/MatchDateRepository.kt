@@ -23,7 +23,7 @@ interface MatchDateRepository {
      * @param id Identificador único de la jornada.
      * @return Un [Optional] que contiene la jornada si existe, o vacío si no se encuentra.
      */
-    fun findById(id: String): Optional<MatchDate>
+    fun findById(id: Long): Optional<MatchDate>
 
     /**
      * Obtiene todas las jornadas de un evento específico.
@@ -31,7 +31,7 @@ interface MatchDateRepository {
      * @param eventId Identificador del evento.
      * @return Lista de jornadas asociadas al evento, ordenadas por fecha.
      */
-    fun findAllByEventId(eventId: String): List<MatchDate>
+    fun findAllByEventId(eventId: Long): List<MatchDate>
 
     /**
      * Elimina una jornada del repositorio.

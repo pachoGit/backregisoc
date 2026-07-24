@@ -29,8 +29,8 @@ class GetClubUseCaseTest {
         val repository = mockk<ClubRepository>()
         val useCase = GetClubUseCase(repository)
 
-        every { repository.findById("nonexistent") } returns Optional.empty()
+        every { repository.findById(99L) } returns Optional.empty()
 
-        assertThrows<EntityNotFoundException> { useCase.findById("nonexistent") }
+        assertThrows<EntityNotFoundException> { useCase.findById(99L) }
     }
 }

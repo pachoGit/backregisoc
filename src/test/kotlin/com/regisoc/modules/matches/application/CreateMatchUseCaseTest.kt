@@ -19,9 +19,9 @@ class CreateMatchUseCaseTest {
         val useCase = CreateMatchUseCase(repository, matchDateRepository, clubRepository)
 
         val command = CreateMatchCommand(
-            matchDateId = "md1",
-            homeClubId = "sameClub",
-            awayClubId = "sameClub",
+            matchDateId = 1L,
+            homeClubId = 1L,
+            awayClubId = 1L,
             scheduledTime = LocalDateTime.now()
         )
 

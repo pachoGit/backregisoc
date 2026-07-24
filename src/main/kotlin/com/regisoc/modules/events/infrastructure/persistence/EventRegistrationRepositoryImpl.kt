@@ -10,10 +10,10 @@ class EventRegistrationRepositoryImpl(
     private val jpaRepository: EventRegistrationJpaRepository
 ) : EventRegistrationRepository {
     override fun save(registration: EventRegistration): EventRegistration = jpaRepository.save(registration)
-    override fun findById(id: String): Optional<EventRegistration> = jpaRepository.findById(id)
-    override fun findByEventId(eventId: String): List<EventRegistration> = jpaRepository.findByEventId(eventId)
-    override fun findByEventIdAndClubId(eventId: String, clubId: String): Optional<EventRegistration> =
+    override fun findById(id: Long): Optional<EventRegistration> = jpaRepository.findById(id)
+    override fun findByEventId(eventId: Long): List<EventRegistration> = jpaRepository.findByEventId(eventId)
+    override fun findByEventIdAndClubId(eventId: Long, clubId: Long): Optional<EventRegistration> =
         jpaRepository.findByEventIdAndClubId(eventId, clubId)
-    override fun findByClubId(clubId: String): List<EventRegistration> = jpaRepository.findByClubId(clubId)
+    override fun findByClubId(clubId: Long): List<EventRegistration> = jpaRepository.findByClubId(clubId)
     override fun delete(registration: EventRegistration) = jpaRepository.delete(registration)
 }

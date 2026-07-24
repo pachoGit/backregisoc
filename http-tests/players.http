@@ -1,17 +1,38 @@
-### Register a new player (with photo files)
+### Register a new player (without photos)
 POST http://localhost:8080/api/players
-Content-Type: multipart/form-data; boundary=boundary
-
---boundary
-Content-Disposition: form-data; name="request"
 Content-Type: application/json
 
 {
-  "clubId": "REPLACE_WITH_CLUB_ID",
-  "name": "Juan Pérez",
+  "clubId": "ea81e21a-4ae3-4d8b-89e8-e1e2a7454fa4",
+  "firstName": "Juan",
+  "lastName": "Pérez",
+  "documentNumber": "12345678",
+  "age": 26,
   "dateOfBirth": "1998-05-15",
   "position": "FORWARD"
 }
+
+### Register a player with photo URLs
+POST http://localhost:8080/api/players
+Content-Type: application/json
+
+{
+  "clubId": "ea81e21a-4ae3-4d8b-89e8-e1e2a7454fa4",
+  "firstName": "Carlos",
+  "lastName": "López",
+  "documentNumber": "87654321",
+  "age": 24,
+  "dateOfBirth": "2000-01-20",
+  "position": "MIDFIELDER",
+  "photoUrl": "https://storage.example.com/photos/carlos.jpg",
+  "documentFrontUrl": "https://storage.example.com/documents/carlos-dni-front.jpg",
+  "documentBackUrl": "https://storage.example.com/documents/carlos-dni-back.jpg"
+}
+
+### Upload photos for an existing player (replace with actual ID)
+POST http://localhost:8080/api/players/REPLACE_WITH_PLAYER_ID/photos
+Content-Type: multipart/form-data; boundary=boundary
+
 --boundary
 Content-Disposition: form-data; name="photo"; filename="player.jpg"
 Content-Type: image/jpeg
@@ -29,22 +50,6 @@ Content-Type: image/jpeg
 < ./dni-back.jpg
 --boundary--
 
-### Register a player without photos (JSON only alternative)
-POST http://localhost:8080/api/players
-Content-Type: multipart/form-data; boundary=simple
-
---simple
-Content-Disposition: form-data; name="request"
-Content-Type: application/json
-
-{
-  "clubId": "REPLACE_WITH_CLUB_ID",
-  "name": "Carlos López",
-  "dateOfBirth": "2000-01-20",
-  "position": "MIDFIELDER"
-}
---simple--
-
 ### Get all players for a club (replace with actual club ID)
 GET http://localhost:8080/api/players?clubId=REPLACE_WITH_CLUB_ID
 
@@ -53,18 +58,16 @@ GET http://localhost:8080/api/players/REPLACE_WITH_PLAYER_ID
 
 ### Update player (replace with actual ID)
 PUT http://localhost:8080/api/players/REPLACE_WITH_PLAYER_ID
-Content-Type: multipart/form-data; boundary=boundary
-
---boundary
-Content-Disposition: form-data; name="request"
 Content-Type: application/json
 
 {
-  "name": "Juan Pérez Actualizado",
+  "firstName": "Juan",
+  "lastName": "Pérez Actualizado",
+  "documentNumber": "12345678",
+  "age": 27,
   "dateOfBirth": "1998-05-15",
   "position": "DEFENDER"
 }
---boundary--
 
 ### Delete a player (replace with actual ID)
 DELETE http://localhost:8080/api/players/REPLACE_WITH_PLAYER_ID
