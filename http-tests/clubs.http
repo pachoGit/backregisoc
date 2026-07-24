@@ -1,0 +1,45 @@
+### Create a new club
+POST http://localhost:8080/api/clubs
+Content-Type: application/json
+
+{
+  "name": "Club Deportivo Municipal",
+  "foundedYear": 1935,
+  "crestUrl": "https://example.com/crest/municipal.png",
+  "description": "Club histórico de la ciudad",
+  "createdBy": "user-admin-1"
+}
+
+### Create another club
+POST http://localhost:8080/api/clubs
+Content-Type: application/json
+
+{
+  "name": "FC Barcelona",
+  "foundedYear": 1899,
+  "description": "Més que un club",
+  "createdBy": "user-admin-2"
+}
+
+### Get all clubs
+GET http://localhost:8080/api/clubs
+
+### Search clubs by name
+GET http://localhost:8080/api/clubs?name=Municipal
+
+### Get club by ID (replace with actual ID)
+GET http://localhost:8080/api/clubs/REPLACE_WITH_CLUB_ID
+
+### Update a club (replace with actual ID)
+PUT http://localhost:8080/api/clubs/REPLACE_WITH_CLUB_ID
+Content-Type: application/json
+
+{
+  "name": "Club Deportivo Municipal - Renovado",
+  "foundedYear": 1935,
+  "crestUrl": "https://example.com/crest/municipal-new.png",
+  "description": "Descripción actualizada"
+}
+
+### Soft delete (deactivate) a club (replace with actual ID)
+DELETE http://localhost:8080/api/clubs/REPLACE_WITH_CLUB_ID

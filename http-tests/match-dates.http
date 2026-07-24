@@ -1,0 +1,22 @@
+### Create a match date for an event (replace with actual event ID)
+POST http://localhost:8080/api/match-dates
+Content-Type: application/json
+
+{
+  "eventId": "REPLACE_WITH_EVENT_ID",
+  "name": "Fecha 1",
+  "date": "2026-03-15"
+}
+
+### Create another match date
+POST http://localhost:8080/api/match-dates
+Content-Type: application/json
+
+{
+  "eventId": "REPLACE_WITH_EVENT_ID",
+  "name": "Fecha 2",
+  "date": "2026-03-22"
+}
+
+### Get all match dates for an event (replace with actual event ID)
+GET http://localhost:8080/api/match-dates/by-event/REPLACE_WITH_EVENT_ID

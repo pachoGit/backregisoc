@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.regisoc.modules.matches.domain.MatchTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-07-18T15:00:46" hostname="pacho" time="0.006">
+  <properties/>
+  <testcase name="should reschedule match()" classname="com.regisoc.modules.matches.domain.MatchTest" time="0.002"/>
+  <testcase name="should change match status()" classname="com.regisoc.modules.matches.domain.MatchTest" time="0.001"/>
+  <testcase name="should create match with scheduled status()" classname="com.regisoc.modules.matches.domain.MatchTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

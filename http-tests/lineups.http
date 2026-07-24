@@ -1,0 +1,19 @@
+### Set lineup for a club in a match (replace with actual IDs)
+POST http://localhost:8080/api/lineups
+Content-Type: application/json
+
+{
+  "matchId": "REPLACE_WITH_MATCH_ID",
+  "clubId": "REPLACE_WITH_CLUB_ID_1",
+  "playerIds": [
+    "REPLACE_WITH_PLAYER_ID_1",
+    "REPLACE_WITH_PLAYER_ID_2",
+    "REPLACE_WITH_PLAYER_ID_3"
+  ]
+}
+
+### Get full match lineups (both clubs) - replace with actual match ID
+GET http://localhost:8080/api/lineups/match/REPLACE_WITH_MATCH_ID
+
+### Get lineup for a specific club in a match (replace with actual IDs)
+GET http://localhost:8080/api/lineups/match/REPLACE_WITH_MATCH_ID?clubId=REPLACE_WITH_CLUB_ID_1

@@ -1,0 +1,30 @@
+### Create a match (replace with actual IDs)
+POST http://localhost:8080/api/matches
+Content-Type: application/json
+
+{
+  "matchDateId": "REPLACE_WITH_MATCH_DATE_ID",
+  "homeClubId": "REPLACE_WITH_CLUB_ID_1",
+  "awayClubId": "REPLACE_WITH_CLUB_ID_2",
+  "scheduledTime": "2026-03-15T16:00:00"
+}
+
+### Create another match
+POST http://localhost:8080/api/matches
+Content-Type: application/json
+
+{
+  "matchDateId": "REPLACE_WITH_MATCH_DATE_ID",
+  "homeClubId": "REPLACE_WITH_CLUB_ID_2",
+  "awayClubId": "REPLACE_WITH_CLUB_ID_1",
+  "scheduledTime": "2026-03-22T18:00:00"
+}
+
+### Get matches by match date (replace with actual match date ID)
+GET http://localhost:8080/api/matches?matchDateId=REPLACE_WITH_MATCH_DATE_ID
+
+### Get matches by club (replace with actual club ID)
+GET http://localhost:8080/api/matches?clubId=REPLACE_WITH_CLUB_ID
+
+### Get match by ID (replace with actual ID)
+GET http://localhost:8080/api/matches/REPLACE_WITH_MATCH_ID
