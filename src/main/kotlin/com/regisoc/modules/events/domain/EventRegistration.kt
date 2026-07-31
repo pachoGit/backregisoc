@@ -13,10 +13,6 @@ import java.time.LocalDateTime
  * Entidad que representa la inscripción de un club en un evento.
  *
  * Vincula un club a un evento específico, registrando el momento en que se realizó la inscripción.
- *
- * @property event Evento al que se inscribe el club.
- * @property club Club que se inscribe en el evento.
- * @property registeredAt Fecha y hora en que se realizó la inscripción.
  */
 @Entity
 @Table(name = "event_registrations")
@@ -25,16 +21,26 @@ class EventRegistration(
     club: Club,
     registeredAt: LocalDateTime = LocalDateTime.now()
 ) : BaseEntity() {
+
+    /**
+     * @property event Evento al que se inscribe el club.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     var event: Event = event
         protected set
 
+    /**
+     * @property club Club que se inscribe en el evento.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "club_id")
     var club: Club = club
         protected set
 
+    /**
+     * @property registeredAt Fecha y hora en que se realizó la inscripción.
+     */
     var registeredAt: LocalDateTime = registeredAt
         protected set
 }

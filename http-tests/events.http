@@ -6,7 +6,7 @@ Content-Type: application/json
   "name": "Torneo Apertura 2026",
   "description": "Torneo oficial de apertura de la temporada",
   "startDate": "2026-03-01",
-  "endDate": "2026-07-15"
+  "endDate": "2026-08-15"
 }
 
 ### Create another event
@@ -27,11 +27,11 @@ GET http://localhost:8080/api/events
 GET http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID
 
 ### Register a club to an event (replace with actual IDs)
-POST http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID/registrations
+POST http://localhost:8080/api/events/1/registrations
 Content-Type: application/json
 
 {
-  "clubId": "REPLACE_WITH_CLUB_ID"
+  "clubId": 2
 }
 
 ### Get all registrations for an event (replace with actual event ID)

@@ -21,11 +21,6 @@ import java.time.LocalDateTime
  * enfrenta a dos clubes (local y visitante) y tiene un estado que determina
  * en qué fase del ciclo de vida se encuentra.
  *
- * @property matchDate Jornada a la que pertenece el partido.
- * @property homeClub Club local.
- * @property awayClub Club visitante.
- * @property scheduledTime Fecha y hora programada para la disputa del partido.
- * @property status Estado actual del partido ([MatchStatus]).
  */
 @Entity
 @Table(name = "matches")
@@ -36,24 +31,40 @@ class Match(
     scheduledTime: LocalDateTime,
     status: MatchStatus = MatchStatus.SCHEDULED
 ) : BaseEntity() {
+
+    /**
+     * @property matchDate Jornada a la que pertenece el partido.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "match_date_id")
     var matchDate: MatchDate = matchDate
         protected set
 
+    /**
+     * @property homeClub Club local.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "home_club_id")
     var homeClub: Club = homeClub
         protected set
 
+    /**
+     * @property awayClub Club visitante.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "away_club_id")
     var awayClub: Club = awayClub
         protected set
 
+    /**
+     * @property scheduledTime Fecha y hora programada para la disputa del partido.
+     */
     var scheduledTime: LocalDateTime = scheduledTime
         protected set
 
+    /**
+     * @property status Estado actual del partido ([MatchStatus]).
+     */
     @Enumerated(EnumType.STRING)
     var status: MatchStatus = status
         protected set

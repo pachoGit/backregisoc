@@ -17,12 +17,6 @@ import java.time.LocalDateTime
  *
  * Un evento agrupa un conjunto de jornadas ([MatchDate]) y puede tener diferentes
  * estados a lo largo de su ciclo de vida: próximo, en curso o finalizado.
- *
- * @property name Nombre del evento o torneo (ej. "Torneo Apertura 2025").
- * @property description Descripción o información adicional del evento (opcional).
- * @property startDate Fecha de inicio del evento.
- * @property endDate Fecha de finalización del evento.
- * @property status Estado actual del evento ([EventStatus]).
  */
 @Entity
 @Table(name = "events")
@@ -33,23 +27,48 @@ class Event(
     endDate: LocalDate,
     status: EventStatus = EventStatus.UPCOMING
 ) : BaseEntity() {
+
+    /**
+     * @property name Nombre del evento o torneo.
+     */
     var name: String = name
         protected set
+
+    /**
+     * @property description Descripción o información adicional del evento (opcional).
+     */
     var description: String? = description
         protected set
+
+    /**
+     * @property startDate Fecha de inicio del evento.
+     */
     var startDate: LocalDate = startDate
         protected set
+
+    /**
+     * @property endDate Fecha de finalización del evento.
+     */
     var endDate: LocalDate = endDate
         protected set
 
+    /**
+     * @property status Estado actual del evento ([EventStatus]).
+     */
     @Enumerated(EnumType.STRING)
     var status: EventStatus = status
         protected set
 
+    /**
+     * @property registrations Lista de clubs registrados en el evento.
+     */
     @OneToMany(mappedBy = "event", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var registrations: MutableList<EventRegistration> = mutableListOf()
         protected set
 
+    /**
+     * @property matchDates Lista de jornadas deportivas (fechas) registrados en el evento.
+     */
     @OneToMany(mappedBy = "event", cascade = [CascadeType.ALL], fetch = FetchType.LAZY)
     var matchDates: MutableList<MatchDate> = mutableListOf()
         protected set

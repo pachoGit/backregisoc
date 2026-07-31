@@ -3,7 +3,7 @@ POST http://localhost:8080/api/match-dates
 Content-Type: application/json
 
 {
-  "eventId": "REPLACE_WITH_EVENT_ID",
+  "eventId": 1,
   "name": "Fecha 1",
   "date": "2026-03-15"
 }
@@ -13,7 +13,7 @@ POST http://localhost:8080/api/match-dates
 Content-Type: application/json
 
 {
-  "eventId": "REPLACE_WITH_EVENT_ID",
+  "eventId": 1,
   "name": "Fecha 2",
   "date": "2026-03-22"
 }

@@ -17,10 +17,6 @@ import java.time.LocalDateTime
  *
  * Cada jornada agrupa varios partidos ([Match]) que se disputan en una misma
  * fecha dentro del calendario de un evento o torneo.
- *
- * @property event Evento al que pertenece la jornada.
- * @property name Nombre identificativo de la jornada (ej. "Fecha 1", "Semifinales").
- * @property date Fecha calendario en la que se disputa la jornada.
  */
 @Entity
 @Table(name = "match_dates")
@@ -29,18 +25,32 @@ class MatchDate(
     name: String,
     date: LocalDate
 ) : BaseEntity() {
+
+    /**
+     * @property event Evento al que pertenece la jornada.
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "event_id")
     var event: Event = event
         protected set
 
-    @OneToMany(mappedBy = "matchDate", fetch = FetchType.LAZY)
-    var matches: MutableList<Match> = mutableListOf()
-        protected set
-
+    /**
+     * @property name Nombre identificativo de la jornada (ej. "Fecha 1", "Semifinales").
+     */
     var name: String = name
         protected set
+
+    /**
+     * @property date Fecha calendario en la que se disputa la jornada.
+     */
     var date: LocalDate = date
+        protected set
+
+    /**
+     * @property name Nombre identificativo de la jornada (ej. "Fecha 1", "Semifinales").
+     */
+    @OneToMany(mappedBy = "matchDate", fetch = FetchType.LAZY)
+    var matches: MutableList<Match> = mutableListOf()
         protected set
 
     /**

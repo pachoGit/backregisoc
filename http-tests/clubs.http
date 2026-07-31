@@ -5,7 +5,7 @@ Content-Type: application/json
 {
   "name": "Club Deportivo Municipal",
   "foundedYear": 1935,
-  "crestUrl": "https://example.com/crest/municipal.png",
+  "crestUrl": "https://imageio.forbes.com/i-forbesimg/media/lists/teams/barcelona_416x416.jpg?format=jpg",
   "description": "Club histórico de la ciudad",
   "createdBy": "user-admin-1"
 }

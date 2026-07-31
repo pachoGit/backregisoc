@@ -1,0 +1,48 @@
+### Create a new physical trainer
+POST http://localhost:8080/api/physical-trainers
+Content-Type: application/json
+
+{
+  "clubId": 1,
+  "firstName": "Fernando",
+  "lastName": "Signorini",
+  "documentNumber": "33444555",
+  "age": 60,
+  "dateOfBirth": "1965-03-12",
+  "photoUrl": "https://storage.example.com/photos/fernando-signorini.jpg"
+}
+
+### Create a physical trainer without photo
+POST http://localhost:8080/api/physical-trainers
+Content-Type: application/json
+
+{
+  "clubId": 1,
+  "firstName": "Luis",
+  "lastName": "Martín",
+  "documentNumber": "44555666",
+  "age": 42,
+  "dateOfBirth": "1983-07-22"
+}
+
+### Get all physical trainers for a club (replace with actual club ID)
+GET http://localhost:8080/api/physical-trainers?clubId=1
+
+### Get physical trainer by ID (replace with actual ID)
+GET http://localhost:8080/api/physical-trainers/1
+
+### Update a physical trainer (replace with actual ID)
+PUT http://localhost:8080/api/physical-trainers/1
+Content-Type: application/json
+
+{
+  "firstName": "Fernando",
+  "lastName": "Signorini",
+  "documentNumber": "33444555",
+  "age": 61,
+  "dateOfBirth": "1965-03-12",
+  "photoUrl": "https://storage.example.com/photos/fernando-signorini-updated.jpg"
+}
+
+### Delete a physical trainer (replace with actual ID)
+DELETE http://localhost:8080/api/physical-trainers/1

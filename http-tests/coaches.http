@@ -1,0 +1,48 @@
+### Create a new coach
+POST http://localhost:8080/api/coaches
+Content-Type: application/json
+
+{
+  "clubId": 1,
+  "firstName": "Carlos",
+  "lastName": "Bianchi",
+  "documentNumber": "11222333",
+  "age": 55,
+  "dateOfBirth": "1970-04-26",
+  "photoUrl": "https://storage.example.com/photos/carlos-bianchi.jpg"
+}
+
+### Create a coach without photo
+POST http://localhost:8080/api/coaches
+Content-Type: application/json
+
+{
+  "clubId": 1,
+  "firstName": "Marcelo",
+  "lastName": "Gallardo",
+  "documentNumber": "22333444",
+  "age": 49,
+  "dateOfBirth": "1976-01-18"
+}
+
+### Get all coaches for a club (replace with actual club ID)
+GET http://localhost:8080/api/coaches?clubId=1
+
+### Get coach by ID (replace with actual ID)
+GET http://localhost:8080/api/coaches/1
+
+### Update a coach (replace with actual ID)
+PUT http://localhost:8080/api/coaches/1
+Content-Type: application/json
+
+{
+  "firstName": "Carlos",
+  "lastName": "Bianchi",
+  "documentNumber": "11222333",
+  "age": 56,
+  "dateOfBirth": "1970-04-26",
+  "photoUrl": "https://storage.example.com/photos/carlos-bianchi-updated.jpg"
+}
+
+### Delete a coach (replace with actual ID)
+DELETE http://localhost:8080/api/coaches/1

@@ -3,9 +3,9 @@ POST http://localhost:8080/api/matches
 Content-Type: application/json
 
 {
-  "matchDateId": "REPLACE_WITH_MATCH_DATE_ID",
-  "homeClubId": "REPLACE_WITH_CLUB_ID_1",
-  "awayClubId": "REPLACE_WITH_CLUB_ID_2",
+  "matchDateId": 1,
+  "homeClubId": 1,
+  "awayClubId": 2,
   "scheduledTime": "2026-03-15T16:00:00"
 }
 
@@ -14,9 +14,9 @@ POST http://localhost:8080/api/matches
 Content-Type: application/json
 
 {
-  "matchDateId": "REPLACE_WITH_MATCH_DATE_ID",
-  "homeClubId": "REPLACE_WITH_CLUB_ID_2",
-  "awayClubId": "REPLACE_WITH_CLUB_ID_1",
+  "matchDateId": 2,
+  "homeClubId": 1,
+  "awayClubId": 2,
   "scheduledTime": "2026-03-22T18:00:00"
 }
 

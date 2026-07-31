@@ -5,8 +5,8 @@ import jakarta.validation.constraints.NotNull
 import java.time.LocalDateTime
 
 data class CreateMatchRequest(
-    @field:NotBlank val matchDateId: Long,
-    @field:NotBlank val homeClubId: Long,
-    @field:NotBlank val awayClubId: Long,
+    @field:NotNull val matchDateId: Long,
+    @field:NotNull val homeClubId: Long,
+    @field:NotNull val awayClubId: Long,
     @field:NotNull val scheduledTime: LocalDateTime
 )

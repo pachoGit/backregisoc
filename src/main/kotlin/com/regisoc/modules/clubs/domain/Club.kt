@@ -52,6 +52,7 @@ class Club(
     /**
      * @property description Descripción o reseña histórica del club (opcional).
      */
+    @Column(columnDefinition="text")
     var description: String? = description
         protected set
 

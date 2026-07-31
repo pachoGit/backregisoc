@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import com.regisoc.modules.events.infrastructure.web.ActiveEventRequest
 
 @RestController
 @RequestMapping("/api/events")
@@ -61,5 +62,10 @@ class EventController(
     fun getRegistrations(@PathVariable eventId: Long): ResponseEntity<List<EventRegistrationResponse>> {
         val registrations = getEventUseCase.getRegistrations(eventId)
         return ResponseEntity.ok(registrations.map { EventRegistrationResponse.from(it) })
+    }
+
+    @GetMapping("/actives/{clubId}")
+    fun active(@PathVariable clubId: Long) {
+
     }
 }

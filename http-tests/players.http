@@ -3,7 +3,7 @@ POST http://localhost:8080/api/players
 Content-Type: application/json
 
 {
-  "clubId": "ea81e21a-4ae3-4d8b-89e8-e1e2a7454fa4",
+  "clubId": 1,
   "firstName": "Juan",
   "lastName": "Pérez",
   "documentNumber": "12345678",
@@ -17,7 +17,7 @@ POST http://localhost:8080/api/players
 Content-Type: application/json
 
 {
-  "clubId": "ea81e21a-4ae3-4d8b-89e8-e1e2a7454fa4",
+  "clubId": 1,
   "firstName": "Carlos",
   "lastName": "López",
   "documentNumber": "87654321",
@@ -51,13 +51,13 @@ Content-Type: image/jpeg
 --boundary--
 
 ### Get all players for a club (replace with actual club ID)
-GET http://localhost:8080/api/players?clubId=REPLACE_WITH_CLUB_ID
+GET http://localhost:8080/api/players?clubId=1
 
 ### Get player by ID (replace with actual ID)
-GET http://localhost:8080/api/players/REPLACE_WITH_PLAYER_ID
+GET http://localhost:8080/api/players/1
 
 ### Update player (replace with actual ID)
-PUT http://localhost:8080/api/players/REPLACE_WITH_PLAYER_ID
+PUT http://localhost:8080/api/players/1
 Content-Type: application/json
 
 {
@@ -70,4 +70,4 @@ Content-Type: application/json
 }
 
 ### Delete a player (replace with actual ID)
-DELETE http://localhost:8080/api/players/REPLACE_WITH_PLAYER_ID
+DELETE http://localhost:8080/api/players/1
