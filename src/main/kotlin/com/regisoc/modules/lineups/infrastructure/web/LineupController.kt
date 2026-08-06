@@ -21,26 +21,28 @@ class LineupController(
     private val getLineupUseCase: GetLineupUseCase
 ) {
     @PostMapping
-    fun setLineup(@Valid @RequestBody request: SetLineupRequest): ResponseEntity<List<LineupItemResponse>> {
+    fun setLineup(@Valid @RequestBody request: SetLineupRequest): ResponseEntity<LineupResponse> {
         val command = SetLineupCommand(
             matchId = request.matchId,
             clubId = request.clubId,
-            playerIds = request.playerIds
+            playerIds = request.playerIds,
+            coachId = request.coachId,
+            physicalTrainerId = request.physicalTrainerId
         )
-        val lineups = setLineupUseCase.execute(command)
-        return ResponseEntity.status(HttpStatus.CREATED).body(lineups.map { LineupItemResponse.from(it) })
+        val lineup = setLineupUseCase.execute(command)
+        return ResponseEntity.status(HttpStatus.CREATED).body(LineupResponse.from(lineup))
     }
 
     @GetMapping("/match/{matchId}")
     fun getMatchLineups(
         @PathVariable matchId: Long,
         @RequestParam(required = false) clubId: Long?
-    ): ResponseEntity<List<LineupItemResponse>> {
+    ): ResponseEntity<List<LineupResponse>> {
         val lineups = if (clubId != null) {
-            getLineupUseCase.getClubLineup(matchId, clubId)
+            listOf(getLineupUseCase.getClubLineup(matchId, clubId))
         } else {
             getLineupUseCase.getMatchLineups(matchId)
         }
-        return ResponseEntity.ok(lineups.map { LineupItemResponse.from(it) })
+        return ResponseEntity.ok(lineups.map { LineupResponse.from(it) })
     }
 }

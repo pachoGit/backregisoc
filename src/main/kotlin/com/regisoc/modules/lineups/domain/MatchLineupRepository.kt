@@ -5,57 +5,32 @@ import java.util.Optional
 /**
  * Repositorio para la entidad [MatchLineup].
  *
- * Define las operaciones de persistencia para las alineaciones de jugadores en partidos,
- * incluyendo operaciones masivas y búsquedas por partido y club.
+ * Define las operaciones de persistencia para las plantillas de los clubes en los partidos.
  */
 interface MatchLineupRepository {
 
     /**
-     * Guarda una alineación en el repositorio.
+     * Guarda una plantilla en el repositorio.
      *
      * @param lineup Entidad [MatchLineup] a persistir.
-     * @return La alineación persistida.
+     * @return La plantilla persistida.
      */
     fun save(lineup: MatchLineup): MatchLineup
 
     /**
-     * Guarda múltiples alineaciones de forma masiva.
-     *
-     * @param lineups Lista de entidades [MatchLineup] a persistir.
-     * @return La lista de alineaciones persistidas.
-     */
-    fun saveAll(lineups: List<MatchLineup>): List<MatchLineup>
-
-    /**
-     * Busca una alineación por su identificador único.
-     *
-     * @param id Identificador único de la alineación.
-     * @return Un [Optional] que contiene la alineación si existe, o vacío si no se encuentra.
-     */
-    fun findById(id: Long): Optional<MatchLineup>
-
-    /**
-     * Obtiene todas las alineaciones de un partido específico.
+     * Obtiene todas las plantillas de un partido específico.
      *
      * @param matchId Identificador del partido.
-     * @return Lista de alineaciones del partido.
+     * @return Lista de plantillas del partido (una por club).
      */
     fun findAllByMatchId(matchId: Long): List<MatchLineup>
 
     /**
-     * Obtiene las alineaciones de un club específico dentro de un partido.
+     * Obtiene la plantilla de un club específico dentro de un partido.
      *
      * @param matchId Identificador del partido.
      * @param clubId Identificador del club.
-     * @return Lista de alineaciones del club en ese partido.
+     * @return Un [Optional] que contiene la plantilla si existe, o vacío si no se encuentra.
      */
-    fun findAllByMatchIdAndClubId(matchId: Long, clubId: Long): List<MatchLineup>
-
-    /**
-     * Elimina todas las alineaciones de un club en un partido específico.
-     *
-     * @param matchId Identificador del partido.
-     * @param clubId Identificador del club.
-     */
-    fun deleteByMatchIdAndClubId(matchId: Long, clubId: Long)
+    fun findByMatchIdAndClubId(matchId: Long, clubId: Long): Optional<MatchLineup>
 }

@@ -17,7 +17,7 @@ POST http://localhost:8080/api/coaches
 Content-Type: application/json
 
 {
-  "clubId": 1,
+  "clubId": 2,
   "firstName": "Marcelo",
   "lastName": "Gallardo",
   "documentNumber": "22333444",

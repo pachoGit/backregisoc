@@ -16,7 +16,7 @@ abstract class BaseEntity(
      * @property id Identificador único generado automáticamente para cada entidad.
      */
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     val id: Long = 0,
 
     /**

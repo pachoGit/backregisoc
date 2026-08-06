@@ -17,14 +17,14 @@ POST http://localhost:8080/api/players
 Content-Type: application/json
 
 {
-  "clubId": 1,
-  "firstName": "Carlos",
-  "lastName": "López",
-  "documentNumber": "87654321",
+  "clubId": 2,
+  "firstName": "Andres",
+  "lastName": "Sanches",
+  "documentNumber": "97654399",
   "age": 24,
   "dateOfBirth": "2000-01-20",
   "position": "MIDFIELDER",
-  "photoUrl": "https://storage.example.com/photos/carlos.jpg",
+  "photoUrl": "https://storage.example.com/photos/pedro.jpg",
   "documentFrontUrl": "https://storage.example.com/documents/carlos-dni-front.jpg",
   "documentBackUrl": "https://storage.example.com/documents/carlos-dni-back.jpg"
 }

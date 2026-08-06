@@ -1,7 +1,6 @@
 package com.regisoc.modules.players.domain
 
 import com.regisoc.modules.clubs.domain.Club
-import com.regisoc.modules.lineups.domain.MatchLineup
 import com.regisoc.shared.domain.BaseEntity
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType
@@ -9,11 +8,11 @@ import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
-import jakarta.persistence.OneToMany
 import jakarta.persistence.Table
 import jakarta.persistence.Column
 import java.time.LocalDate
 import java.time.LocalDateTime
+import org.assertj.core.api.LocalDateTimeAssert
 
 /**
  * Entidad que representa un jugador registrado en el sistema.
@@ -107,10 +106,6 @@ class Player(
     var club: Club = club
         protected set
 
-    @OneToMany(mappedBy = "player", fetch = FetchType.LAZY)
-    var lineups: MutableList<MatchLineup> = mutableListOf()
-        protected set
-
     /**
      * Actualiza todos los datos editables del jugador.
      *
@@ -155,6 +150,11 @@ class Player(
         this.photoUrl = photoUrl
         this.documentFrontUrl = documentFrontUrl
         this.documentBackUrl = documentBackUrl
+        this.updatedAt = LocalDateTime.now()
+    }
+
+    fun delete() {
+        this.deletedAt = LocalDateTime.now()
         this.updatedAt = LocalDateTime.now()
     }
 }

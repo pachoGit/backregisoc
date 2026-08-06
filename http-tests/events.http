@@ -13,7 +13,7 @@ Content-Type: application/json
 POST http://localhost:8080/api/events
 Content-Type: application/json
 
-{
+{n
   "name": "Copa Verano 2026",
   "description": "Torneo amistoso de verano",
   "startDate": "2026-01-15",

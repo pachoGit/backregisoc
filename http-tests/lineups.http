@@ -1,15 +1,32 @@
-### Set lineup for a club in a match (replace with actual IDs)
+### Set lineup (plantilla) for a club in a match (replace with actual IDs)
+### Players are optional (max 22), coach is required, physical trainer is optional.
+### All member data is stored as a copy (snapshot).
 POST http://localhost:8080/api/lineups
 Content-Type: application/json
 
 {
-  "matchId": "REPLACE_WITH_MATCH_ID",
-  "clubId": "REPLACE_WITH_CLUB_ID_1",
+  "matchId": 1,
+  "clubId": 1,
   "playerIds": [
-    "REPLACE_WITH_PLAYER_ID_1",
-    "REPLACE_WITH_PLAYER_ID_2",
-    "REPLACE_WITH_PLAYER_ID_3"
-  ]
+    1,
+    2,
+  ],
+  "coachId": 1,
+  "physicalTrainerId": "REPLACE_WITH_PHYSICAL_TRAINER_ID"
+}
+
+### Set lineup without physical trainer
+POST http://localhost:8080/api/lineups
+Content-Type: application/json
+
+{
+  "matchId": 1,
+  "clubId": 1,
+  "playerIds": [
+    1,
+    2
+  ],
+  "coachId": 1
 }
 
 ### Get full match lineups (both clubs) - replace with actual match ID
