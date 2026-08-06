@@ -13,6 +13,8 @@ data class PhysicalTrainerResponse(
     val age: Int,
     val dateOfBirth: LocalDate,
     val photoUrl: String?,
+    val documentFrontUrl: String?,
+    val documentBackUrl: String?,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime
 ) {
@@ -26,6 +28,8 @@ data class PhysicalTrainerResponse(
             age = physicalTrainer.age,
             dateOfBirth = physicalTrainer.dateOfBirth,
             photoUrl = physicalTrainer.photoUrl,
+            documentFrontUrl = physicalTrainer.documentFrontUrl,
+            documentBackUrl = physicalTrainer.documentBackUrl,
             createdAt = physicalTrainer.createdAt,
             updatedAt = physicalTrainer.updatedAt
         )

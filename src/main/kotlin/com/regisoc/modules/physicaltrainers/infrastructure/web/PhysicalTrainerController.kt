@@ -39,7 +39,9 @@ class PhysicalTrainerController(
             documentNumber = request.documentNumber,
             age = request.age,
             dateOfBirth = request.dateOfBirth,
-            photoUrl = request.photoUrl
+            photoUrl = request.photoUrl,
+            documentFrontUrl = request.documentFrontUrl,
+            documentBackUrl = request.documentBackUrl
         )
         val physicalTrainer = createPhysicalTrainerUseCase.execute(command)
         return ResponseEntity.status(HttpStatus.CREATED).body(PhysicalTrainerResponse.from(physicalTrainer))
@@ -57,7 +59,9 @@ class PhysicalTrainerController(
             documentNumber = request.documentNumber,
             age = request.age,
             dateOfBirth = request.dateOfBirth,
-            photoUrl = request.photoUrl
+            photoUrl = request.photoUrl,
+            documentFrontUrl = request.documentFrontUrl,
+            documentBackUrl = request.documentBackUrl
         )
         updatePhysicalTrainerUseCase.execute(command)
         return ResponseEntity.noContent().build()

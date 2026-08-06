@@ -13,6 +13,8 @@ data class CoachResponse(
     val age: Int,
     val dateOfBirth: LocalDate,
     val photoUrl: String?,
+    val documentFrontUrl: String?,
+    val documentBackUrl: String?,
     val createdAt: LocalDateTime,
     val updatedAt: LocalDateTime
 ) {
@@ -26,6 +28,8 @@ data class CoachResponse(
             age = coach.age,
             dateOfBirth = coach.dateOfBirth,
             photoUrl = coach.photoUrl,
+            documentFrontUrl = coach.documentFrontUrl,
+            documentBackUrl = coach.documentBackUrl,
             createdAt = coach.createdAt,
             updatedAt = coach.updatedAt
         )

@@ -12,7 +12,9 @@ data class UpdatePhysicalTrainerCommand(
     val documentNumber: String,
     val age: Int,
     val dateOfBirth: LocalDate,
-    val photoUrl: String?
+    val photoUrl: String?,
+    val documentFrontUrl: String?,
+    val documentBackUrl: String?
 )
 
 @Service
@@ -29,7 +31,9 @@ class UpdatePhysicalTrainerUseCase(
             documentNumber = command.documentNumber,
             age = command.age,
             dateOfBirth = command.dateOfBirth,
-            photoUrl = command.photoUrl
+            photoUrl = command.photoUrl,
+            documentFrontUrl = command.documentFrontUrl,
+            documentBackUrl = command.documentBackUrl
         )
         repository.save(physicalTrainer)
     }

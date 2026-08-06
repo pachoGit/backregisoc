@@ -14,7 +14,9 @@ data class CreateCoachCommand(
     val documentNumber: String,
     val age: Int,
     val dateOfBirth: LocalDate,
-    val photoUrl: String?
+    val photoUrl: String?,
+    val documentFrontUrl: String?,
+    val documentBackUrl: String?
 )
 
 @Service
@@ -33,7 +35,9 @@ class CreateCoachUseCase(
             documentNumber = command.documentNumber,
             age = command.age,
             dateOfBirth = command.dateOfBirth,
-            photoUrl = command.photoUrl
+            photoUrl = command.photoUrl,
+            documentFrontUrl = command.documentFrontUrl,
+            documentBackUrl = command.documentBackUrl
         )
         return repository.save(coach)
     }

@@ -11,5 +11,7 @@ data class CreatePhysicalTrainerRequest(
     @field:NotBlank val documentNumber: String,
     val age: Int,
     @field:NotNull val dateOfBirth: LocalDate,
-    val photoUrl: String? = null
+    val photoUrl: String? = null,
+    val documentFrontUrl: String? = null,
+    val documentBackUrl: String? = null
 )

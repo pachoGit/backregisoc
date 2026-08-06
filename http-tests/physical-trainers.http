@@ -9,7 +9,9 @@ Content-Type: application/json
   "documentNumber": "33444555",
   "age": 60,
   "dateOfBirth": "1965-03-12",
-  "photoUrl": "https://storage.example.com/photos/fernando-signorini.jpg"
+  "photoUrl": "https://storage.example.com/photos/fernando-signorini.jpg",
+  "documentFrontUrl": "https://storage.example.com/documents/fernando-signorini-dni-front.jpg",
+  "documentBackUrl": "https://storage.example.com/documents/fernando-signorini-dni-back.jpg"
 }
 
 ### Create a physical trainer without photo
@@ -41,7 +43,9 @@ Content-Type: application/json
   "documentNumber": "33444555",
   "age": 61,
   "dateOfBirth": "1965-03-12",
-  "photoUrl": "https://storage.example.com/photos/fernando-signorini-updated.jpg"
+  "photoUrl": "https://storage.example.com/photos/fernando-signorini-updated.jpg",
+  "documentFrontUrl": "https://storage.example.com/documents/fernando-signorini-dni-front-updated.jpg",
+  "documentBackUrl": "https://storage.example.com/documents/fernando-signorini-dni-back-updated.jpg"
 }
 
 ### Delete a physical trainer (replace with actual ID)

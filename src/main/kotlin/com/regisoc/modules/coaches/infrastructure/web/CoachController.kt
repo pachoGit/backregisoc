@@ -39,7 +39,9 @@ class CoachController(
             documentNumber = request.documentNumber,
             age = request.age,
             dateOfBirth = request.dateOfBirth,
-            photoUrl = request.photoUrl
+            photoUrl = request.photoUrl,
+            documentFrontUrl = request.documentFrontUrl,
+            documentBackUrl = request.documentBackUrl
         )
         val coach = createCoachUseCase.execute(command)
         return ResponseEntity.status(HttpStatus.CREATED).body(CoachResponse.from(coach))
@@ -57,7 +59,9 @@ class CoachController(
             documentNumber = request.documentNumber,
             age = request.age,
             dateOfBirth = request.dateOfBirth,
-            photoUrl = request.photoUrl
+            photoUrl = request.photoUrl,
+            documentFrontUrl = request.documentFrontUrl,
+            documentBackUrl = request.documentBackUrl
         )
         updateCoachUseCase.execute(command)
         return ResponseEntity.noContent().build()

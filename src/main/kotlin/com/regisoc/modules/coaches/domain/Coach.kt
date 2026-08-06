@@ -20,7 +20,9 @@ class Coach(
     documentNumber: String,
     age: Int,
     dateOfBirth: LocalDate,
-    photoUrl: String? = null
+    photoUrl: String? = null,
+    documentFrontUrl: String? = null,
+    documentBackUrl: String? = null
 ) : BaseEntity() {
 
     @Column(nullable = false)
@@ -47,6 +49,14 @@ class Coach(
     var photoUrl: String? = photoUrl
         protected set
 
+    @Column(columnDefinition = "text")
+    var documentFrontUrl: String? = documentFrontUrl
+        protected set
+
+    @Column(columnDefinition = "text")
+    var documentBackUrl: String? = documentBackUrl
+        protected set
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "club_id")
     var club: Club = club
@@ -58,7 +68,9 @@ class Coach(
         documentNumber: String,
         age: Int,
         dateOfBirth: LocalDate,
-        photoUrl: String?
+        photoUrl: String?,
+        documentFrontUrl: String?,
+        documentBackUrl: String?
     ) {
         this.firstName = firstName
         this.lastName = lastName
@@ -66,6 +78,8 @@ class Coach(
         this.age = age
         this.dateOfBirth = dateOfBirth
         this.photoUrl = photoUrl
+        this.documentFrontUrl = documentFrontUrl
+        this.documentBackUrl = documentBackUrl
         this.updatedAt = LocalDateTime.now()
     }
 }
