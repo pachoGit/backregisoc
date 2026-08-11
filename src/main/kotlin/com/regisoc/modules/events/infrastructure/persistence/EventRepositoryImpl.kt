@@ -12,5 +12,6 @@ class EventRepositoryImpl(
     override fun save(event: Event): Event = jpaRepository.save(event)
     override fun findById(id: Long): Optional<Event> = jpaRepository.findById(id)
     override fun findAll(): List<Event> = jpaRepository.findAll()
+    override fun findActive(clubId: Long?): List<Event> = jpaRepository.findActive(clubId)
     override fun delete(event: Event) = jpaRepository.delete(event)
 }

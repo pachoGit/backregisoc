@@ -13,15 +13,21 @@ Content-Type: application/json
 POST http://localhost:8080/api/events
 Content-Type: application/json
 
-{n
+{
   "name": "Copa Verano 2026",
   "description": "Torneo amistoso de verano",
   "startDate": "2026-01-15",
-  "endDate": "2026-02-28"
+  "endDate": "2026-11-28"
 }
 
 ### Get all events
 GET http://localhost:8080/api/events
+
+### Get active events (non-deleted with at least one club registered)
+GET http://localhost:8080/api/events/active
+
+### Get active events filtered by a specific club
+GET http://localhost:8080/api/events/active?clubId=2
 
 ### Get event by ID (replace with actual ID)
 GET http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID
@@ -36,3 +42,9 @@ Content-Type: application/json
 
 ### Get all registrations for an event (replace with actual event ID)
 GET http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID/registrations
+
+### Start an event (only if status is UPCOMING)
+POST http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID/start
+
+### Finish an event (only if status is ONGOING)
+POST http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID/finish

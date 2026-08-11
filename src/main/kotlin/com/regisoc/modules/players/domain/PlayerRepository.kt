@@ -33,11 +33,4 @@ interface PlayerRepository {
      * @return Lista de jugadores pertenecientes al club.
      */
     fun findAllByClubId(clubId: Long): List<Player>
-
-    /**
-     * Elimina un jugador del repositorio.
-     *
-     * @param player Entidad [Player] a eliminar.
-     */
-    fun delete(player: Player)
 }

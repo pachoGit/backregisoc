@@ -5,6 +5,9 @@ import com.regisoc.modules.events.application.CreateEventUseCase
 import com.regisoc.modules.events.application.GetEventUseCase
 import com.regisoc.modules.events.application.RegisterClubCommand
 import com.regisoc.modules.events.application.RegisterClubToEventUseCase
+import com.regisoc.modules.events.application.UpdateEventStatusCommand
+import com.regisoc.modules.events.application.UpdateEventStatusUseCase
+import com.regisoc.modules.events.domain.EventStatus
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -22,7 +25,8 @@ import com.regisoc.modules.events.infrastructure.web.ActiveEventRequest
 class EventController(
     private val createEventUseCase: CreateEventUseCase,
     private val registerClubToEventUseCase: RegisterClubToEventUseCase,
-    private val getEventUseCase: GetEventUseCase
+    private val getEventUseCase: GetEventUseCase,
+    private val updateEventStatusUseCase: UpdateEventStatusUseCase
 ) {
     @PostMapping
     fun create(@Valid @RequestBody request: CreateEventRequest): ResponseEntity<EventResponse> {
@@ -46,6 +50,24 @@ class EventController(
         return ResponseEntity.status(HttpStatus.CREATED).body(EventRegistrationResponse.from(registration))
     }
 
+    @PostMapping("/{id}/start")
+    fun start(@PathVariable id: Long): ResponseEntity<Void> {
+        updateEventStatusUseCase.execute(UpdateEventStatusCommand(id, EventStatus.ONGOING))
+        return ResponseEntity.noContent().build()
+    }
+
+    @PostMapping("/{id}/finish")
+    fun finish(@PathVariable id: Long): ResponseEntity<Void> {
+        updateEventStatusUseCase.execute(UpdateEventStatusCommand(id, EventStatus.FINISHED))
+        return ResponseEntity.noContent().build()
+    }
+
+    @GetMapping("/active")
+    fun getActive(activeEventRequest: ActiveEventRequest): ResponseEntity<List<EventResponse>> {
+        val events = getEventUseCase.findActive(activeEventRequest.clubId)
+        return ResponseEntity.ok(events.map { EventResponse.from(it) })
+    }
+
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long): ResponseEntity<EventResponse> {
         val event = getEventUseCase.findById(id)
@@ -62,10 +84,5 @@ class EventController(
     fun getRegistrations(@PathVariable eventId: Long): ResponseEntity<List<EventRegistrationResponse>> {
         val registrations = getEventUseCase.getRegistrations(eventId)
         return ResponseEntity.ok(registrations.map { EventRegistrationResponse.from(it) })
-    }
-
-    @GetMapping("/actives/{clubId}")
-    fun active(@PathVariable clubId: Long) {
-
     }
 }

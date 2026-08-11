@@ -18,14 +18,14 @@ Content-Type: application/json
 
 {
   "clubId": 2,
-  "firstName": "Andres",
+  "firstName": "Luis",
   "lastName": "Sanches",
   "documentNumber": "97654399",
   "age": 24,
-  "dateOfBirth": "2000-01-20",
+  "dateOfBirth": "2000-30-05",
   "position": "MIDFIELDER",
   "photoUrl": "https://storage.example.com/photos/pedro.jpg",
-  "documentFrontUrl": "https://storage.example.com/documents/carlos-dni-front.jpg",
+  "documentFrontUrl": "https://ciudadania.pe/actividades-interactivas/static/media/ordenar8.155d0398e5f8867aac02.png",
   "documentBackUrl": "https://storage.example.com/documents/carlos-dni-back.jpg"
 }
 

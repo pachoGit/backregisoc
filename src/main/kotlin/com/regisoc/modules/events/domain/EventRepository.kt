@@ -33,6 +33,16 @@ interface EventRepository {
     fun findAll(): List<Event>
 
     /**
+     * Obtiene los eventos activos, es decir, no eliminados y en los que
+     * al menos un club está registrado.
+     *
+     * @param clubId Identificador del club. Si se proporciona, solo se devuelven
+     *               los eventos en los que ese club está registrado.
+     * @return Lista de eventos activos.
+     */
+    fun findActive(clubId: Long?): List<Event>
+
+    /**
      * Elimina un evento del repositorio.
      *
      * @param event Entidad [Event] a eliminar.

@@ -19,6 +19,8 @@ class GetEventUseCase(
 
     fun findAll(): List<Event> = eventRepository.findAll()
 
+    fun findActive(clubId: Long?): List<Event> = eventRepository.findActive(clubId)
+
     fun getRegistrations(eventId: Long): List<EventRegistration> =
         registrationRepository.findByEventId(eventId)
 
