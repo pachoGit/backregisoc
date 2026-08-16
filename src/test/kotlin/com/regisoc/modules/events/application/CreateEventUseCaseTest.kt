@@ -19,6 +19,7 @@ class CreateEventUseCaseTest {
 
         val command = CreateEventCommand(
             name = "Torneo Test",
+            location = "Estadio Único",
             description = "Desc",
             startDate = LocalDate.now(),
             endDate = LocalDate.now().plusMonths(1)
@@ -29,6 +30,7 @@ class CreateEventUseCaseTest {
         val result = useCase.execute(command)
 
         assertEquals("Torneo Test", result.name)
+        assertEquals("Estadio Único", result.location)
         assertEquals(EventStatus.UPCOMING, result.status)
         verify { repository.save(any()) }
     }

@@ -22,6 +22,7 @@ import java.time.LocalDateTime
 @Table(name = "events")
 class Event(
     name: String,
+    location: String? = null,
     description: String? = null,
     startDate: LocalDate,
     endDate: LocalDate,
@@ -32,6 +33,12 @@ class Event(
      * @property name Nombre del evento o torneo.
      */
     var name: String = name
+        protected set
+
+    /**
+     * @property location Lugar o sede donde se realiza el evento (opcional).
+     */
+    var location: String? = location
         protected set
 
     /**
@@ -77,12 +84,14 @@ class Event(
      * Actualiza los datos generales del evento.
      *
      * @param name Nuevo nombre del evento.
+     * @param location Nuevo lugar o sede del evento.
      * @param description Nueva descripción (puede ser `null`).
      * @param startDate Nueva fecha de inicio.
      * @param endDate Nueva fecha de finalización.
      */
-    fun update(name: String, description: String?, startDate: LocalDate, endDate: LocalDate) {
+    fun update(name: String, location: String?, description: String?, startDate: LocalDate, endDate: LocalDate) {
         this.name = name
+        this.location = location
         this.description = description
         this.startDate = startDate
         this.endDate = endDate

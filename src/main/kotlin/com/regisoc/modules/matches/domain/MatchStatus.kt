@@ -6,7 +6,7 @@ package com.regisoc.modules.matches.domain
 enum class MatchStatus {
 
     /** El partido está programado y aún no ha comenzado. */
-    SCHEDULED,
+    UPCOMING,
 
     /** El partido se está disputando actualmente. */
     ONGOING,
@@ -15,5 +15,5 @@ enum class MatchStatus {
     FINISHED,
 
     /** El partido ha sido cancelado y no se disputará. */
-    CANCELLED
+    CANCELED
 }

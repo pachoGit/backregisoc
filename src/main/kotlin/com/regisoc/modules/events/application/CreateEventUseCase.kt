@@ -8,6 +8,7 @@ import java.time.LocalDate
 
 data class CreateEventCommand(
     val name: String,
+    val location: String?,
     val description: String?,
     val startDate: LocalDate,
     val endDate: LocalDate
@@ -18,6 +19,7 @@ class CreateEventUseCase(private val repository: EventRepository) {
     fun execute(command: CreateEventCommand): Event {
         val event = Event(
             name = command.name,
+            location = command.location,
             description = command.description,
             startDate = command.startDate,
             endDate = command.endDate,

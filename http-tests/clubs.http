@@ -15,9 +15,9 @@ POST http://localhost:8080/api/clubs
 Content-Type: application/json
 
 {
-  "name": "FC Barcelona",
+  "name": "Real Madrid",
   "foundedYear": 1899,
-  "description": "Més que un club",
+  "description": "Hala Madrid",
   "createdBy": "user-admin-2"
 }
 

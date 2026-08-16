@@ -4,6 +4,8 @@ import com.regisoc.modules.events.domain.Event
 import com.regisoc.modules.matches.domain.Match
 import com.regisoc.shared.domain.BaseEntity
 import jakarta.persistence.Entity
+import jakarta.persistence.EnumType
+import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
@@ -23,7 +25,8 @@ import java.time.LocalDateTime
 class MatchDate(
     event: Event,
     name: String,
-    date: LocalDate
+    date: LocalDate,
+    status: MatchDateStatus = MatchDateStatus.UPCOMING
 ) : BaseEntity() {
 
     /**
@@ -47,7 +50,14 @@ class MatchDate(
         protected set
 
     /**
-     * @property name Nombre identificativo de la jornada (ej. "Fecha 1", "Semifinales").
+     * @property status Estado actual de la jornada ([MatchDateStatus]).
+     */
+    @Enumerated(EnumType.STRING)
+    var status: MatchDateStatus = status
+        protected set
+
+    /**
+     * @property matches Lista de partidos que conforman la jornada.
      */
     @OneToMany(mappedBy = "matchDate", fetch = FetchType.LAZY)
     var matches: MutableList<Match> = mutableListOf()
@@ -62,6 +72,16 @@ class MatchDate(
     fun update(name: String, date: LocalDate) {
         this.name = name
         this.date = date
+        this.updatedAt = LocalDateTime.now()
+    }
+
+    /**
+     * Cambia el estado de la jornada.
+     *
+     * @param status Nuevo estado de la jornada ([MatchDateStatus]).
+     */
+    fun changeStatus(status: MatchDateStatus) {
+        this.status = status
         this.updatedAt = LocalDateTime.now()
     }
 }

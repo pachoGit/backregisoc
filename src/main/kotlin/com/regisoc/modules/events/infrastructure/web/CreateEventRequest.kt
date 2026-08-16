@@ -7,6 +7,7 @@ import java.time.LocalDate
 
 data class CreateEventRequest(
     @field:NotBlank val name: String,
+    val location: String?,
     val description: String?,
     @field:NotNull val startDate: LocalDate,
     @field:NotNull @field:Future val endDate: LocalDate

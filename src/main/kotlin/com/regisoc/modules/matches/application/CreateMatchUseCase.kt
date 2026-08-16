@@ -39,7 +39,7 @@ class CreateMatchUseCase(
             homeClub = homeClub,
             awayClub = awayClub,
             scheduledTime = command.scheduledTime,
-            status = MatchStatus.SCHEDULED
+            status = MatchStatus.UPCOMING
         )
         return repository.save(match)
     }

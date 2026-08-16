@@ -6,7 +6,7 @@ Content-Type: application/json
   "matchDateId": 1,
   "homeClubId": 1,
   "awayClubId": 2,
-  "scheduledTime": "2026-03-15T16:00:00"
+  "scheduledTime": "2026-03-16T16:00:00"
 }
 
 ### Create another match

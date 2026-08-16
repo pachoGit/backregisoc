@@ -17,6 +17,7 @@ class MatchTest {
         val awayClub = Club(name = "Away FC", createdBy = "user1")
         val event = Event(
             name = "Test Event",
+            location = "Test Location",
             startDate = LocalDate.now(),
             endDate = LocalDate.now().plusMonths(1)
         )
@@ -32,7 +33,7 @@ class MatchTest {
     @Test
     fun `should create match with scheduled status`() {
         val match = createMatch()
-        assertEquals(MatchStatus.SCHEDULED, match.status)
+        assertEquals(MatchStatus.UPCOMING, match.status)
         assertEquals("Home FC", match.homeClub.name)
         assertEquals("Away FC", match.awayClub.name)
     }

@@ -61,6 +61,7 @@ class MatchLineupPersistenceTest {
         val event = eventRepository.save(
             Event(
                 name = "Test Event",
+                location = "Test Location",
                 startDate = LocalDate.now(),
                 endDate = LocalDate.now().plusMonths(1)
             )

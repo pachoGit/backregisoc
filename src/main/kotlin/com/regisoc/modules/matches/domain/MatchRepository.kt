@@ -35,6 +35,14 @@ interface MatchRepository {
     fun findAllByMatchDateId(matchDateId: Long): List<Match>
 
     /**
+     * Obtiene todos los partidos de todas las jornadas de un evento específico.
+     *
+     * @param eventId Identificador del evento.
+     * @return Lista de partidos de las jornadas del evento.
+     */
+    fun findAllByEventId(eventId: Long): List<Match>
+
+    /**
      * Obtiene todos los partidos en los que participa un club (ya sea como local o visitante).
      *
      * @param clubId Identificador del club.
@@ -48,4 +56,13 @@ interface MatchRepository {
      * @param match Entidad [Match] a eliminar.
      */
     fun delete(match: Match)
+
+    /**
+     * Obtiene todos los partidos de un evento en los que participa un club (ya sea como local o visitante)
+     *
+     * @param eventId Identificador del evento.
+     * @param clubId Identificador del club.
+     * @return Lista de partidos del club.
+     */
+    fun findByEventIdAndClubId(eventId: Long, clubId: Long): List<Match>
 }

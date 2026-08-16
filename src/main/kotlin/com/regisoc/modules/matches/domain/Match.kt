@@ -29,7 +29,7 @@ class Match(
     homeClub: Club,
     awayClub: Club,
     scheduledTime: LocalDateTime,
-    status: MatchStatus = MatchStatus.SCHEDULED
+    status: MatchStatus = MatchStatus.UPCOMING
 ) : BaseEntity() {
 
     /**

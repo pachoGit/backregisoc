@@ -5,7 +5,8 @@ Content-Type: application/json
 {
   "eventId": 1,
   "name": "Fecha 1",
-  "date": "2026-03-15"
+  "date": "2026-03-15",
+  "status": "UPCOMING"
 }
 
 ### Create another match date
@@ -15,8 +16,12 @@ Content-Type: application/json
 {
   "eventId": 1,
   "name": "Fecha 2",
-  "date": "2026-03-22"
+  "date": "2026-03-30",
+  "status": "UPCOMING"
 }
 
 ### Get all match dates for an event (replace with actual event ID)
 GET http://localhost:8080/api/match-dates/by-event/REPLACE_WITH_EVENT_ID
+
+### Get match dates of a specific event where a club is registered (replace with actual IDs)
+GET http://localhost:8080/api/match-dates/by-event/1/club/1

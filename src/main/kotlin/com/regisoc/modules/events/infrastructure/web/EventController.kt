@@ -32,6 +32,7 @@ class EventController(
     fun create(@Valid @RequestBody request: CreateEventRequest): ResponseEntity<EventResponse> {
         val command = CreateEventCommand(
             name = request.name,
+            location = request.location,
             description = request.description,
             startDate = request.startDate,
             endDate = request.endDate
@@ -62,8 +63,8 @@ class EventController(
         return ResponseEntity.noContent().build()
     }
 
-    @GetMapping("/active")
-    fun getActive(activeEventRequest: ActiveEventRequest): ResponseEntity<List<EventResponse>> {
+    @GetMapping("/club")
+    fun getByClub(activeEventRequest: ActiveEventRequest): ResponseEntity<List<EventResponse>> {
         val events = getEventUseCase.findActive(activeEventRequest.clubId)
         return ResponseEntity.ok(events.map { EventResponse.from(it) })
     }

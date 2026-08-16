@@ -12,6 +12,7 @@ class MatchDateTest {
     fun `should create match date`() {
         val event = Event(
             name = "Test Event",
+            location = "Test Location",
             startDate = LocalDate.now(),
             endDate = LocalDate.now().plusMonths(1)
         )
@@ -23,12 +24,27 @@ class MatchDateTest {
         assertNotNull(matchDate.id)
         assertEquals(event.id, matchDate.event.id)
         assertEquals("Fecha 1", matchDate.name)
+        assertEquals(MatchDateStatus.UPCOMING, matchDate.status)
+    }
+
+    @Test
+    fun `should update match date status`() {
+        val event = Event(
+            name = "Test Event",
+            location = "Test Location",
+            startDate = LocalDate.now(),
+            endDate = LocalDate.now().plusMonths(1)
+        )
+        val matchDate = MatchDate(event = event, name = "Fecha 1", date = LocalDate.now())
+        matchDate.changeStatus(MatchDateStatus.ONGOING)
+        assertEquals(MatchDateStatus.ONGOING, matchDate.status)
     }
 
     @Test
     fun `should update match date`() {
         val event = Event(
             name = "Test Event",
+            location = "Test Location",
             startDate = LocalDate.now(),
             endDate = LocalDate.now().plusMonths(1)
         )

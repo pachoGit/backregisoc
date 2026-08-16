@@ -8,6 +8,7 @@ import java.time.LocalDateTime
 data class EventResponse(
     val id: Long,
     val name: String,
+    val location: String?,
     val description: String?,
     val startDate: LocalDate,
     val endDate: LocalDate,
@@ -19,6 +20,7 @@ data class EventResponse(
         fun from(event: Event) = EventResponse(
             id = event.id,
             name = event.name,
+            location = event.location,
             description = event.description,
             startDate = event.startDate,
             endDate = event.endDate,

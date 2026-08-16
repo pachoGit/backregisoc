@@ -4,6 +4,7 @@ Content-Type: application/json
 
 {
   "name": "Torneo Apertura 2026",
+  "location": "Estadio Único de La Plata",
   "description": "Torneo oficial de apertura de la temporada",
   "startDate": "2026-03-01",
   "endDate": "2026-08-15"
@@ -15,6 +16,7 @@ Content-Type: application/json
 
 {
   "name": "Copa Verano 2026",
+  "location": "Complejo Deportivo Roca",
   "description": "Torneo amistoso de verano",
   "startDate": "2026-01-15",
   "endDate": "2026-11-28"
@@ -27,7 +29,7 @@ GET http://localhost:8080/api/events
 GET http://localhost:8080/api/events/active
 
 ### Get active events filtered by a specific club
-GET http://localhost:8080/api/events/active?clubId=2
+GET http://localhost:8080/api/events/club?clubId=2
 
 ### Get event by ID (replace with actual ID)
 GET http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID
@@ -37,7 +39,7 @@ POST http://localhost:8080/api/events/1/registrations
 Content-Type: application/json
 
 {
-  "clubId": 2
+  "clubId": 3
 }
 
 ### Get all registrations for an event (replace with actual event ID)

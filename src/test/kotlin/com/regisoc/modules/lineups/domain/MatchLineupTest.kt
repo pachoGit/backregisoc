@@ -21,6 +21,7 @@ class MatchLineupTest {
     private fun createMatch(): Match {
         val event = Event(
             name = "Test Event",
+            location = "Test Location",
             startDate = LocalDate.now(),
             endDate = LocalDate.now().plusMonths(1)
         )
@@ -30,7 +31,7 @@ class MatchLineupTest {
             homeClub = Club(name = "Test FC", createdBy = "user1"),
             awayClub = Club(name = "Visitor FC", createdBy = "user1"),
             scheduledTime = LocalDateTime.now(),
-            status = MatchStatus.SCHEDULED
+            status = MatchStatus.UPCOMING
         )
     }
 
