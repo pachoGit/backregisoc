@@ -103,7 +103,7 @@ class MatchLineup(
      */
     fun setLineup(
         players: List<LineupPlayer>,
-        coach: LineupCoach,
+        coach: LineupCoach?,
         physicalTrainer: LineupPhysicalTrainer?
     ) {
         this.players = players.toMutableList()

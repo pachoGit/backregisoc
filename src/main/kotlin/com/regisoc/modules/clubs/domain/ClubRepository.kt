@@ -26,6 +26,14 @@ interface ClubRepository {
     fun findById(id: Long): Optional<Club>
 
     /**
+     * Busca un club activo por su identificador único.
+     *
+     * @param id Identificador único del club.
+     * @return Un [Optional] que contiene el club si existe, o vacío si no se encuentra.
+     */
+    fun findActiveById(id: Long): Optional<Club>
+
+    /**
      * Obtiene todos los clubes registrados en el sistema.
      *
      * @return Lista completa de clubes.

@@ -23,8 +23,11 @@ Content-Type: application/json
   "matchId": 1,
   "clubId": 1,
   "playerIds": [
-    1,
-    2
+    3,
+    4,
+    5,
+    6,
+    7
   ],
   "coachId": 1
 }
@@ -33,4 +36,7 @@ Content-Type: application/json
 GET http://localhost:8080/api/lineups/match/REPLACE_WITH_MATCH_ID
 
 ### Get lineup for a specific club in a match (replace with actual IDs)
-GET http://localhost:8080/api/lineups/match/REPLACE_WITH_MATCH_ID?clubId=REPLACE_WITH_CLUB_ID_1
+GET http://localhost:8080/api/lineups/match/1?clubId=1
+
+### Get lineup for a specific club in a match (replace with actual IDs)
+GET http://localhost:8080/api/lineups/match/1/club/1

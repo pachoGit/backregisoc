@@ -122,7 +122,9 @@ class MatchLineupTest {
             documentNumber = "00000000",
             age = 60,
             dateOfBirth = LocalDate.of(1965, 1, 1),
-            photoUrl = null
+            photoUrl = null,
+            documentFrontUrl = null,
+            documentBackUrl = null
         )
 
         assertEquals("John", lineup.players[0].firstName)

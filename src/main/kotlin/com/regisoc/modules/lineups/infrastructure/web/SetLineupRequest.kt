@@ -7,6 +7,6 @@ data class SetLineupRequest(
     @field:NotNull val matchId: Long,
     @field:NotNull val clubId: Long,
     @field:Size(max = 22) val playerIds: List<Long> = emptyList(),
-    @field:NotNull val coachId: Long,
+    val coachId: Long? = null,
     val physicalTrainerId: Long? = null
 )

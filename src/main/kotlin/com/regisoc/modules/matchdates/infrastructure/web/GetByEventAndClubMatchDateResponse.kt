@@ -56,9 +56,6 @@ data class GetByEventAndClubMatchResponse(
     }
 }
 
-
-
-
 data class GetByEventAndClubClubResponse(
     val id: Long,
     val name: String,

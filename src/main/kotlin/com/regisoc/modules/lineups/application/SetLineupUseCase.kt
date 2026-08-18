@@ -17,7 +17,7 @@ data class SetLineupCommand(
     val matchId: Long,
     val clubId: Long,
     val playerIds: List<Long>,
-    val coachId: Long,
+    val coachId: Long?,
     val physicalTrainerId: Long?
 )
 
@@ -49,8 +49,13 @@ class SetLineupUseCase(
             LineupPlayer.from(player)
         }
 
-        val coach = coachRepository.findById(command.coachId)
-            .orElseThrow { EntityNotFoundException("Coach not found: ${command.coachId}") }
+        val coach = command.coachId?.let { coachId ->
+            coachRepository.findById(coachId)
+                .orElseThrow { EntityNotFoundException("Coach not found: $coachId") }
+        }
+
+        // val coach = coachRepository.findById(command.coachId)
+        //     .orElseThrow { EntityNotFoundException("Coach not found: ${command.coachId}") }
 
         val physicalTrainer = command.physicalTrainerId?.let { physicalTrainerId ->
             physicalTrainerRepository.findById(physicalTrainerId)
@@ -62,7 +67,7 @@ class SetLineupUseCase(
 
         lineup.setLineup(
             players = players,
-            coach = LineupCoach.from(coach),
+            coach = coach?.let { LineupCoach.from(it) },
             physicalTrainer = physicalTrainer?.let { LineupPhysicalTrainer.from(it) }
         )
         return repository.save(lineup)

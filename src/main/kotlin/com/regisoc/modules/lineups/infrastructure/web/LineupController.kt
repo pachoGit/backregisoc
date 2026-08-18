@@ -45,4 +45,13 @@ class LineupController(
         }
         return ResponseEntity.ok(lineups.map { LineupResponse.from(it) })
     }
+
+    @GetMapping("/match/{matchId}/club/{clubId}")
+    fun getOfClub(
+        @PathVariable matchId: Long,
+        @PathVariable clubId: Long
+    ): ResponseEntity<LineupResponse> {
+        val lineup = getLineupUseCase.getClubLineup(matchId, clubId)
+        return ResponseEntity.ok(LineupResponse.from(lineup))
+    }
 }

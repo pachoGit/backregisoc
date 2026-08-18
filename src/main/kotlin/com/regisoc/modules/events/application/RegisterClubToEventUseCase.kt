@@ -6,6 +6,7 @@ import com.regisoc.modules.events.domain.EventRegistrationRepository
 import com.regisoc.modules.events.domain.EventRepository
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.stereotype.Service
+import com.regisoc.modules.events.domain.EventStatus
 
 data class RegisterClubCommand(
     val eventId: Long,
@@ -20,8 +21,13 @@ class RegisterClubToEventUseCase(
 ) {
     fun execute(command: RegisterClubCommand): EventRegistration {
         val event = eventRepository.findById(command.eventId)
-            .orElseThrow { EntityNotFoundException("Event not found with id: ${command.eventId}") }
-        val club = clubRepository.findById(command.clubId)
+            .orElseThrow { EntityNotFoundException("El evento no existe con id: ${command.eventId}") }
+
+        require(event.status == EventStatus.UPCOMING) {
+            "Ya no se puede registrar al club por el estado del evento"
+        }
+
+        val club = clubRepository.findActiveById(command.clubId)
             .orElseThrow { EntityNotFoundException("Club not found with id: ${command.clubId}") }
 
         if (registrationRepository.findByEventIdAndClubId(command.eventId, command.clubId).isPresent) {

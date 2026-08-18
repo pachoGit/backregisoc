@@ -142,7 +142,9 @@ class MatchLineupPersistenceTest {
             documentNumber = "00000000",
             age = 60,
             dateOfBirth = LocalDate.of(1965, 1, 1),
-            photoUrl = null
+            photoUrl = null,
+            documentFrontUrl = null,
+            documentBackUrl = null
         )
 
         val loaded = lineupRepository.findByMatchIdAndClubId(match.id, homeClub.id)
