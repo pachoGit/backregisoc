@@ -44,7 +44,6 @@ class Club(
     /**
      * @property crestUrl URL pública del escudo o emblema del club (opcional).
      */
-
     @Column(columnDefinition="text")
     var crestUrl: String? = crestUrl
         protected set
@@ -69,22 +68,37 @@ class Club(
     var isActive: Boolean = isActive
         protected set
 
+    /**
+     * @property players Lista de jugadores del club.
+     */
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
     var players: MutableList<Player> = mutableListOf()
         protected set
 
+    /**
+     * @property eventRegistrations Lista de eventos a los esta registrado el club.
+     */
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
     var eventRegistrations: MutableList<EventRegistration> = mutableListOf()
         protected set
 
+    /**
+     * @property matchLineups Lista de plantillas que ha registrado el club.
+     */
     @OneToMany(mappedBy = "club", fetch = FetchType.LAZY)
     var matchLineups: MutableList<MatchLineup> = mutableListOf()
         protected set
 
+    /**
+     * @property homeMatches Lista de partidos en los que el club ha sido local.
+     */
     @OneToMany(mappedBy = "homeClub", fetch = FetchType.LAZY)
     var homeMatches: MutableList<Match> = mutableListOf()
         protected set
 
+    /**
+     * @property awayMatches Lista de partidos en los que el club ha sido visitante.
+     */
     @OneToMany(mappedBy = "awayClub", fetch = FetchType.LAZY)
     var awayMatches: MutableList<Match> = mutableListOf()
         protected set
