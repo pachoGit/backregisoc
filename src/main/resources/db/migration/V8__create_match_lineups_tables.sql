@@ -1,0 +1,40 @@
+CREATE TABLE match_lineups (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
+    deleted_at DATETIME NULL,
+    match_id BIGINT NOT NULL,
+    club_id BIGINT NOT NULL,
+    coach_id BIGINT NOT NULL,
+    coach_first_name VARCHAR(255) NOT NULL,
+    coach_last_name VARCHAR(255) NOT NULL,
+    coach_document_number VARCHAR(255) NOT NULL,
+    coach_age INT NOT NULL,
+    coach_date_of_birth DATE NOT NULL,
+    coach_photo_url TEXT NULL,
+    physical_trainer_id BIGINT NULL,
+    physical_trainer_first_name VARCHAR(255) NULL,
+    physical_trainer_last_name VARCHAR(255) NULL,
+    physical_trainer_document_number VARCHAR(255) NULL,
+    physical_trainer_age INT NULL,
+    physical_trainer_date_of_birth DATE NULL,
+    physical_trainer_photo_url TEXT NULL,
+    CONSTRAINT fk_match_lineups_match FOREIGN KEY (match_id) REFERENCES matches(id),
+    CONSTRAINT fk_match_lineups_club FOREIGN KEY (club_id) REFERENCES clubs(id),
+    CONSTRAINT uk_match_lineup_club UNIQUE (match_id, club_id)
+);
+
+CREATE TABLE match_lineup_players (
+    lineup_id BIGINT NOT NULL,
+    lineup_order INT NOT NULL,
+    player_id BIGINT NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
+    document_number VARCHAR(255) NOT NULL,
+    age INT NOT NULL,
+    date_of_birth DATE NOT NULL,
+    position VARCHAR(255) NULL,
+    photo_url TEXT NULL,
+    CONSTRAINT fk_lineup_players_lineup FOREIGN KEY (lineup_id) REFERENCES match_lineups(id),
+    PRIMARY KEY (lineup_id, lineup_order)
+);
