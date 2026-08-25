@@ -15,4 +15,5 @@ class ClubRepositoryImpl(
     override fun findByNameContaining(name: String): List<Club> = jpaRepository.findByNameContaining(name)
     override fun delete(club: Club) = jpaRepository.delete(club)
     override fun findActiveById(id: Long): Optional<Club> = jpaRepository.findActiveById(id)
+    override fun findActiveByClubId(clubId: Long): Optional<Club> = jpaRepository.findActiveByClubId(clubId)
 }

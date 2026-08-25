@@ -1,6 +1,8 @@
 package com.regisoc.modules.clubs.infrastructure.web
 
 import com.regisoc.modules.clubs.application.*
+import com.regisoc.shared.infrastructure.security.CurrentUserHelper
+import org.springframework.security.access.AccessDeniedException
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -12,7 +14,8 @@ class ClubController(
     private val createClubUseCase: CreateClubUseCase,
     private val updateClubUseCase: UpdateClubUseCase,
     private val getClubUseCase: GetClubUseCase,
-    private val deleteClubUseCase: DeleteClubUseCase
+    private val deleteClubUseCase: DeleteClubUseCase,
+    private val currentUserHelper: CurrentUserHelper
 ) {
     @PostMapping
     fun create(@Valid @RequestBody request: CreateClubRequest): ResponseEntity<ClubResponse> {
@@ -42,14 +45,29 @@ class ClubController(
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long): ResponseEntity<ClubResponse> {
+        if (!currentUserHelper.isAdmin()) {
+            val userClubId = currentUserHelper.getCurrentUserClubId()
+                ?: throw AccessDeniedException("User is not associated with any club")
+            if (userClubId != id) {
+                throw AccessDeniedException("You can only access your own club information")
+            }
+        }
         val club = getClubUseCase.findById(id)
         return ResponseEntity.ok(ClubResponse.from(club))
     }
 
     @GetMapping
     fun getAll(@RequestParam(required = false) name: String?): ResponseEntity<List<ClubResponse>> {
-        val clubs = if (name != null) getClubUseCase.searchByName(name) else getClubUseCase.findAll()
-        return ResponseEntity.ok(clubs.map { ClubResponse.from(it) })
+        if (currentUserHelper.isAdmin()) {
+            val clubs = if (name != null) getClubUseCase.searchByName(name) else getClubUseCase.findAll()
+            return ResponseEntity.ok(clubs.map { ClubResponse.from(it) })
+        }
+
+        val userClubId = currentUserHelper.getCurrentUserClubId()
+            ?: throw AccessDeniedException("User is not associated with any club")
+
+        val club = getClubUseCase.findById(userClubId)
+        return ResponseEntity.ok(listOf(ClubResponse.from(club)))
     }
 
     @DeleteMapping("/{id}")

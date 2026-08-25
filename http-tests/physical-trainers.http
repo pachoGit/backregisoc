@@ -1,6 +1,7 @@
 ### Create a new physical trainer
 POST http://localhost:8080/api/physical-trainers
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "clubId": 1,
@@ -17,11 +18,12 @@ Content-Type: application/json
 ### Create a physical trainer without photo
 POST http://localhost:8080/api/physical-trainers
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "clubId": 1,
   "firstName": "Luis",
-  "lastName": "Martín",
+  "lastName": "Martin",
   "documentNumber": "44555666",
   "age": 42,
   "dateOfBirth": "1983-07-22"
@@ -29,13 +31,16 @@ Content-Type: application/json
 
 ### Get all physical trainers for a club (replace with actual club ID)
 GET http://localhost:8080/api/physical-trainers?clubId=1
+Authorization: Bearer {{token}}
 
 ### Get physical trainer by ID (replace with actual ID)
 GET http://localhost:8080/api/physical-trainers/1
+Authorization: Bearer {{token}}
 
 ### Update a physical trainer (replace with actual ID)
 PUT http://localhost:8080/api/physical-trainers/1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Fernando",
@@ -50,3 +55,4 @@ Content-Type: application/json
 
 ### Delete a physical trainer (replace with actual ID)
 DELETE http://localhost:8080/api/physical-trainers/1
+Authorization: Bearer {{token}}

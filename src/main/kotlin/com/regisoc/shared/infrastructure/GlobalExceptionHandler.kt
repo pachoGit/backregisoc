@@ -1,8 +1,11 @@
 package com.regisoc.shared.infrastructure
 
 import jakarta.persistence.EntityNotFoundException
+import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpStatus
 import org.springframework.http.ProblemDetail
+import org.springframework.security.access.AccessDeniedException
+import org.springframework.security.authentication.BadCredentialsException
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -47,6 +50,24 @@ class GlobalExceptionHandler {
         problem.title = "Validation Failed"
         problem.detail = "One or more fields are invalid"
         problem.setProperty("errors", errors)
+        return problem
+    }
+
+    @ExceptionHandler(AccessDeniedException::class)
+    fun handleAccessDenied(ex: AccessDeniedException): ProblemDetail {
+        val problem = ProblemDetail.forStatus(HttpStatus.FORBIDDEN)
+        problem.title = "Forbidden"
+        problem.detail = ex.message ?: "Access denied"
+        problem.type = URI.create("about:blank")
+        return problem
+    }
+
+    @ExceptionHandler(BadCredentialsException::class)
+    fun handleBadCredentials(ex: BadCredentialsException): ProblemDetail {
+        val problem = ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED)
+        problem.title = "Unauthorized"
+        problem.detail = "Invalid username or password"
+        problem.type = URI.create("about:blank")
         return problem
     }
 }

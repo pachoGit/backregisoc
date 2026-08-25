@@ -1,6 +1,7 @@
 ### Create a new event
 POST http://localhost:8080/api/events
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "name": "Torneo Apertura 2026",
@@ -13,6 +14,7 @@ Content-Type: application/json
 ### Create another event
 POST http://localhost:8080/api/events
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "name": "Copa Verano 2026",
@@ -24,19 +26,24 @@ Content-Type: application/json
 
 ### Get all events
 GET http://localhost:8080/api/events
+Authorization: Bearer {{token}}
 
 ### Get active events (non-deleted with at least one club registered)
 GET http://localhost:8080/api/events/active
+Authorization: Bearer {{token}}
 
 ### Get active events filtered by a specific club
 GET http://localhost:8080/api/events/club?clubId=2
+Authorization: Bearer {{token}}
 
 ### Get event by ID (replace with actual ID)
 GET http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID
+Authorization: Bearer {{token}}
 
 ### Register a club to an event (replace with actual IDs)
 POST http://localhost:8080/api/events/1/registrations
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "clubId": 3
@@ -44,9 +51,12 @@ Content-Type: application/json
 
 ### Get all registrations for an event (replace with actual event ID)
 GET http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID/registrations
+Authorization: Bearer {{token}}
 
 ### Start an event (only if status is UPCOMING)
 POST http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID/start
+Authorization: Bearer {{token}}
 
 ### Finish an event (only if status is ONGOING)
 POST http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID/finish
+Authorization: Bearer {{token}}

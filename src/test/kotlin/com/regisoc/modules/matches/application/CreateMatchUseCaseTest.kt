@@ -1,6 +1,7 @@
 package com.regisoc.modules.matches.application
 
 import com.regisoc.modules.clubs.domain.ClubRepository
+import com.regisoc.modules.events.domain.EventRegistrationRepository
 import com.regisoc.modules.matchdates.domain.MatchDateRepository
 import com.regisoc.modules.matches.domain.MatchRepository
 import io.mockk.mockk
@@ -16,7 +17,8 @@ class CreateMatchUseCaseTest {
         val repository = mockk<MatchRepository>()
         val matchDateRepository = mockk<MatchDateRepository>()
         val clubRepository = mockk<ClubRepository>()
-        val useCase = CreateMatchUseCase(repository, matchDateRepository, clubRepository)
+        val registrationRepository = mockk<EventRegistrationRepository>()
+        val useCase = CreateMatchUseCase(repository, matchDateRepository, clubRepository, registrationRepository)
 
         val command = CreateMatchCommand(
             matchDateId = 1L,
@@ -26,6 +28,6 @@ class CreateMatchUseCaseTest {
         )
 
         val exception = assertThrows<IllegalArgumentException> { useCase.execute(command) }
-        assertTrue(exception.message?.contains("different") == true)
+        assertTrue(exception.message?.contains("distintos") == true)
     }
 }

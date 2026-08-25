@@ -1,6 +1,7 @@
-### Create a new club
+### Create a new club (ADMIN only)
 POST http://localhost:8080/api/clubs
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "name": "Club Deportivo Municipal",
@@ -10,9 +11,10 @@ Content-Type: application/json
   "createdBy": "user-admin-1"
 }
 
-### Create another club
+### Create another club (ADMIN only)
 POST http://localhost:8080/api/clubs
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "name": "Real Madrid",
@@ -21,18 +23,22 @@ Content-Type: application/json
   "createdBy": "user-admin-2"
 }
 
-### Get all clubs
+### Get all clubs (ADMIN sees all, CLUB_MANAGER sees only their club)
 GET http://localhost:8080/api/clubs
+Authorization: Bearer {{token}}
 
-### Search clubs by name
+### Search clubs by name (ADMIN only)
 GET http://localhost:8080/api/clubs?name=Municipal
+Authorization: Bearer {{token}}
 
-### Get club by ID (replace with actual ID)
+### Get club by ID (ADMIN sees any, CLUB_MANAGER only their own)
 GET http://localhost:8080/api/clubs/REPLACE_WITH_CLUB_ID
+Authorization: Bearer {{token}}
 
 ### Update a club (replace with actual ID)
 PUT http://localhost:8080/api/clubs/REPLACE_WITH_CLUB_ID
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "name": "Club Deportivo Municipal - Renovado",
@@ -43,3 +49,4 @@ Content-Type: application/json
 
 ### Soft delete (deactivate) a club (replace with actual ID)
 DELETE http://localhost:8080/api/clubs/REPLACE_WITH_CLUB_ID
+Authorization: Bearer {{token}}

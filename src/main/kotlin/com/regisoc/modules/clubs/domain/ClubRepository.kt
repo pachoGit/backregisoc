@@ -49,6 +49,14 @@ interface ClubRepository {
     fun findByNameContaining(name: String): List<Club>
 
     /**
+     * Busca un club activo por su identificador único.
+     *
+     * @param clubId Identificador único del club.
+     * @return Un [Optional] que contiene el club si existe, o vacío si no se encuentra.
+     */
+    fun findActiveByClubId(clubId: Long): Optional<Club>
+
+    /**
      * Elimina un club del repositorio.
      *
      * @param club Entidad [Club] a eliminar.

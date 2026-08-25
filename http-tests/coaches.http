@@ -1,6 +1,7 @@
 ### Create a new coach
 POST http://localhost:8080/api/coaches
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "clubId": 1,
@@ -17,6 +18,7 @@ Content-Type: application/json
 ### Create a coach without photo
 POST http://localhost:8080/api/coaches
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "clubId": 2,
@@ -29,13 +31,16 @@ Content-Type: application/json
 
 ### Get all coaches for a club (replace with actual club ID)
 GET http://localhost:8080/api/coaches?clubId=1
+Authorization: Bearer {{token}}
 
 ### Get coach by ID (replace with actual ID)
 GET http://localhost:8080/api/coaches/1
+Authorization: Bearer {{token}}
 
 ### Update a coach (replace with actual ID)
 PUT http://localhost:8080/api/coaches/1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Carlos",
@@ -50,3 +55,4 @@ Content-Type: application/json
 
 ### Delete a coach (replace with actual ID)
 DELETE http://localhost:8080/api/coaches/1
+Authorization: Bearer {{token}}

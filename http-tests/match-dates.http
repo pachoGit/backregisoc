@@ -1,6 +1,7 @@
 ### Create a match date for an event (replace with actual event ID)
 POST http://localhost:8080/api/match-dates
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "eventId": 1,
@@ -12,6 +13,7 @@ Content-Type: application/json
 ### Create another match date
 POST http://localhost:8080/api/match-dates
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "eventId": 1,
@@ -22,6 +24,8 @@ Content-Type: application/json
 
 ### Get all match dates for an event (replace with actual event ID)
 GET http://localhost:8080/api/match-dates/by-event/REPLACE_WITH_EVENT_ID
+Authorization: Bearer {{token}}
 
 ### Get match dates of a specific event where a club is registered (replace with actual IDs)
 GET http://localhost:8080/api/match-dates/by-event/1/club/1
+Authorization: Bearer {{token}}

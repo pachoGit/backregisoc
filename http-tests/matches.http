@@ -1,6 +1,7 @@
 ### Create a match (replace with actual IDs)
 POST http://localhost:8080/api/matches
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "matchDateId": 1,
@@ -12,6 +13,7 @@ Content-Type: application/json
 ### Create another match
 POST http://localhost:8080/api/matches
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "matchDateId": 2,
@@ -22,9 +24,12 @@ Content-Type: application/json
 
 ### Get matches by match date (replace with actual match date ID)
 GET http://localhost:8080/api/matches?matchDateId=REPLACE_WITH_MATCH_DATE_ID
+Authorization: Bearer {{token}}
 
 ### Get matches by club (replace with actual club ID)
 GET http://localhost:8080/api/matches?clubId=REPLACE_WITH_CLUB_ID
+Authorization: Bearer {{token}}
 
 ### Get match by ID (replace with actual ID)
 GET http://localhost:8080/api/matches/REPLACE_WITH_MATCH_ID
+Authorization: Bearer {{token}}

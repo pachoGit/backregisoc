@@ -21,4 +21,11 @@ interface ClubJpaRepository : JpaRepository<Club, Long> {
         WHERE c.isActive = true
            """)
     fun findActiveAll(): List<Club>
+
+    @Query("""
+        SELECT c FROM Club c
+        WHERE c.id = :clubId
+        AND c.isActive = true
+           """)
+    fun findActiveByClubId(@Param("clubId") clubId: Long): Optional<Club>
 }

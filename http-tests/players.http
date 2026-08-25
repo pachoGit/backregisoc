@@ -1,6 +1,7 @@
 ### Register a new player (without photos)
 POST http://localhost:8080/api/players
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "clubId": 1,
@@ -15,6 +16,7 @@ Content-Type: application/json
 ### Register a player with photo URLs
 POST http://localhost:8080/api/players
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "clubId": 2,
@@ -32,6 +34,7 @@ Content-Type: application/json
 ### Upload photos for an existing player (replace with actual ID)
 POST http://localhost:8080/api/players/REPLACE_WITH_PLAYER_ID/photos
 Content-Type: multipart/form-data; boundary=boundary
+Authorization: Bearer {{token}}
 
 --boundary
 Content-Disposition: form-data; name="photo"; filename="player.jpg"
@@ -52,13 +55,16 @@ Content-Type: image/jpeg
 
 ### Get all players for a club (replace with actual club ID)
 GET http://localhost:8080/api/players?clubId=1
+# Authorization: Bearer {{token}}
 
 ### Get player by ID (replace with actual ID)
 GET http://localhost:8080/api/players/1
+Authorization: Bearer {{token}}
 
 ### Update player (replace with actual ID)
 PUT http://localhost:8080/api/players/1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "firstName": "Juan",
@@ -71,3 +77,4 @@ Content-Type: application/json
 
 ### Delete a player (replace with actual ID)
 DELETE http://localhost:8080/api/players/1
+Authorization: Bearer {{token}}
