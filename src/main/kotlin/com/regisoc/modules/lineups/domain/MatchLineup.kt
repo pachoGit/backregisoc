@@ -73,7 +73,9 @@ class MatchLineup(
         AttributeOverride(name = "documentNumber", column = Column(name = "coach_document_number")),
         AttributeOverride(name = "age", column = Column(name = "coach_age")),
         AttributeOverride(name = "dateOfBirth", column = Column(name = "coach_date_of_birth")),
-        AttributeOverride(name = "photoUrl", column = Column(name = "coach_photo_url", columnDefinition = "text"))
+        AttributeOverride(name = "photoUrl", column = Column(name = "coach_photo_url", columnDefinition = "text")),
+        AttributeOverride(name = "documentFrontUrl", column = Column(name = "coach_document_front_url", columnDefinition = "text")),
+        AttributeOverride(name = "documentBackUrl", column = Column(name = "coach_document_back_url", columnDefinition = "text"))
     )
     var coach: LineupCoach? = null
         protected set
@@ -89,7 +91,9 @@ class MatchLineup(
         AttributeOverride(name = "documentNumber", column = Column(name = "physical_trainer_document_number")),
         AttributeOverride(name = "age", column = Column(name = "physical_trainer_age")),
         AttributeOverride(name = "dateOfBirth", column = Column(name = "physical_trainer_date_of_birth")),
-        AttributeOverride(name = "photoUrl", column = Column(name = "physical_trainer_photo_url", columnDefinition = "text"))
+        AttributeOverride(name = "photoUrl", column = Column(name = "physical_trainer_photo_url", columnDefinition = "text")),
+        AttributeOverride(name = "documentFrontUrl", column = Column(name = "physical_trainer_document_front_url", columnDefinition = "text")),
+        AttributeOverride(name = "documentBackUrl", column = Column(name = "physical_trainer_document_back_url", columnDefinition = "text"))
     )
     var physicalTrainer: LineupPhysicalTrainer? = null
         protected set

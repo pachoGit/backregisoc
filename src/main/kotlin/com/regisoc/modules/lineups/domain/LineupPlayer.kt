@@ -23,7 +23,9 @@ class LineupPlayer(
     age: Int,
     dateOfBirth: LocalDate,
     position: PlayerPosition?,
-    photoUrl: String?
+    photoUrl: String?,
+    documentFrontUrl: String?,
+    documentBackUrl: String?
 ) {
     @Column(name = "player_id", nullable = false)
     val playerId: Long = playerId
@@ -50,6 +52,12 @@ class LineupPlayer(
     @Column(name = "photo_url", columnDefinition = "text")
     val photoUrl: String? = photoUrl
 
+    @Column(name = "document_front_url", columnDefinition = "text")
+    val documentFrontUrl: String? = documentFrontUrl
+
+    @Column(name = "document_back_url", columnDefinition = "text")
+    val documentBackUrl: String? = documentBackUrl
+
     companion object {
         fun from(player: Player) = LineupPlayer(
             playerId = player.id,
@@ -59,7 +67,9 @@ class LineupPlayer(
             age = player.age,
             dateOfBirth = player.dateOfBirth,
             position = player.position,
-            photoUrl = player.photoUrl
+            photoUrl = player.photoUrl,
+            documentFrontUrl = player.documentFrontUrl,
+            documentBackUrl = player.documentBackUrl
         )
     }
 }

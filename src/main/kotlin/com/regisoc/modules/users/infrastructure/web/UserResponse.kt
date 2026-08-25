@@ -24,7 +24,7 @@ data class UserResponse(
             documentNumber = user.documentNumber,
             username = user.username,
             role = user.role,
-            clubId = user.clubId,
+            clubId = user.club?.id,
             isActive = user.isActive,
             createdAt = user.createdAt,
             updatedAt = user.updatedAt

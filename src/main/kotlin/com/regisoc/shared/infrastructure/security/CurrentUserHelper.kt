@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component
 class CurrentUserHelper(
     private val userRepository: UserRepository
 ) {
-
     fun getCurrentUserId(): Long {
         val username = getCurrentUsername()
         val user = userRepository.findByUsername(username)
@@ -28,7 +27,7 @@ class CurrentUserHelper(
         val username = getCurrentUsername()
         val user = userRepository.findByUsername(username)
             .orElseThrow { IllegalStateException("Authenticated user not found: $username") }
-        return user.clubId
+        return user.club?.id
     }
 
     fun isAdmin(): Boolean = getCurrentUserRole() == UserRole.ADMIN

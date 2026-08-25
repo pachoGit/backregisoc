@@ -20,9 +20,10 @@ class PasswordHashingTest {
 
     @Test
     fun `should hash password correctly`() {
-        val rawPassword = "mySecurePassword123"
+        val rawPassword = "admin"
         val hashedPassword = passwordEncoder.encode(rawPassword)
 
+        println(hashedPassword)
         assertNotEquals(rawPassword, hashedPassword)
         assertTrue(passwordEncoder.matches(rawPassword, hashedPassword))
         assertTrue(hashedPassword.startsWith("\$2a\$"))

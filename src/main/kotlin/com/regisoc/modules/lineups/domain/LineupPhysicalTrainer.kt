@@ -19,7 +19,9 @@ class LineupPhysicalTrainer(
     documentNumber: String,
     age: Int,
     dateOfBirth: LocalDate,
-    photoUrl: String?
+    photoUrl: String?,
+    documentFrontUrl: String?,
+    documentBackUrl: String?
 ) {
     @Column(name = "physical_trainer_id", nullable = false)
     val physicalTrainerId: Long = physicalTrainerId
@@ -42,6 +44,12 @@ class LineupPhysicalTrainer(
     @Column(name = "photo_url", columnDefinition = "text")
     val photoUrl: String? = photoUrl
 
+    @Column(name = "document_front_url", columnDefinition = "text")
+    val documentFrontUrl: String? = documentFrontUrl
+
+    @Column(name = "document_back_url", columnDefinition = "text")
+    val documentBackUrl: String? = documentBackUrl
+
     companion object {
         fun from(physicalTrainer: PhysicalTrainer) = LineupPhysicalTrainer(
             physicalTrainerId = physicalTrainer.id,
@@ -50,7 +58,9 @@ class LineupPhysicalTrainer(
             documentNumber = physicalTrainer.documentNumber,
             age = physicalTrainer.age,
             dateOfBirth = physicalTrainer.dateOfBirth,
-            photoUrl = physicalTrainer.photoUrl
+            photoUrl = physicalTrainer.photoUrl,
+            documentFrontUrl = physicalTrainer.documentFrontUrl,
+            documentBackUrl = physicalTrainer.documentBackUrl
         )
     }
 }

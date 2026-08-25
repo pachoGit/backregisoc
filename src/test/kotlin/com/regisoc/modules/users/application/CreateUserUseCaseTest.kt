@@ -1,6 +1,7 @@
 package com.regisoc.modules.users.application
 
-import com.regisoc.modules.users.domain.User
+import com.regisoc.modules.clubs.domain.Club
+import com.regisoc.modules.clubs.domain.ClubRepository
 import com.regisoc.modules.users.domain.UserRepository
 import com.regisoc.modules.users.domain.UserRole
 import io.mockk.every
@@ -10,12 +11,14 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import java.util.Optional
 
 class CreateUserUseCaseTest {
 
     private val repository = mockk<UserRepository>()
+    private val clubRepository = mockk<ClubRepository>()
     private val passwordEncoder = BCryptPasswordEncoder()
-    private val useCase = CreateUserUseCase(repository, passwordEncoder)
+    private val useCase = CreateUserUseCase(repository, clubRepository, passwordEncoder)
 
     @Test
     fun `should create user successfully`() {
@@ -61,7 +64,8 @@ class CreateUserUseCaseTest {
     }
 
     @Test
-    fun `should create club manager with clubId`() {
+    fun `should create club manager with club`() {
+        val club = Club(name = "Test Club", foundedYear = 2000, createdBy = "admin")
         val command = CreateUserCommand(
             name = "Jane",
             surname = "Smith",
@@ -73,12 +77,14 @@ class CreateUserUseCaseTest {
         )
 
         every { repository.existsByUsername("janesmith") } returns false
+        every { clubRepository.findById(1L) } returns Optional.of(club)
         every { repository.save(any()) } answers { firstArg() }
 
         val result = useCase.execute(command)
 
         assertEquals(UserRole.CLUB_MANAGER, result.role)
-        assertEquals(1L, result.clubId)
+        assertNotNull(result.club)
+        assertEquals(club.id, result.club!!.id)
     }
 
     @Test

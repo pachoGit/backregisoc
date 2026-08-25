@@ -10,7 +10,9 @@ data class LineupPhysicalTrainerResponse(
     val documentNumber: String,
     val age: Int,
     val dateOfBirth: LocalDate,
-    val photoUrl: String?
+    val photoUrl: String?,
+    val documentFrontUrl: String?,
+    val documentBackUrl: String?
 ) {
     companion object {
         fun from(lineupPhysicalTrainer: LineupPhysicalTrainer) = LineupPhysicalTrainerResponse(
@@ -20,7 +22,9 @@ data class LineupPhysicalTrainerResponse(
             documentNumber = lineupPhysicalTrainer.documentNumber,
             age = lineupPhysicalTrainer.age,
             dateOfBirth = lineupPhysicalTrainer.dateOfBirth,
-            photoUrl = lineupPhysicalTrainer.photoUrl
+            photoUrl = lineupPhysicalTrainer.photoUrl,
+            documentFrontUrl = lineupPhysicalTrainer.documentFrontUrl,
+            documentBackUrl = lineupPhysicalTrainer.documentBackUrl
         )
     }
 }

@@ -10,7 +10,7 @@ Authorization: Bearer {{token}}
   "clubId": 1,
   "playerIds": [
     1,
-    2,
+    2
   ],
   "coachId": 1,
   "physicalTrainerId": "REPLACE_WITH_PHYSICAL_TRAINER_ID"

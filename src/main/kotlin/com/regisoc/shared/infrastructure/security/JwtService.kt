@@ -29,8 +29,8 @@ class JwtService(
             "username" to user.username,
             "role" to user.role.name
         )
-        if (user.clubId != null) {
-            claims["clubId"] = user.clubId!!
+        if (user.club != null) {
+            claims["clubId"] = user.club!!.id
         }
         return Jwts.builder()
             .claims(claims)

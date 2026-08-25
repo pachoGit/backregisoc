@@ -10,7 +10,9 @@ data class LineupCoachResponse(
     val documentNumber: String,
     val age: Int,
     val dateOfBirth: LocalDate,
-    val photoUrl: String?
+    val photoUrl: String?,
+    val documentFrontUrl: String?,
+    val documentBackUrl: String?
 ) {
     companion object {
         fun from(lineupCoach: LineupCoach) = LineupCoachResponse(
@@ -20,7 +22,9 @@ data class LineupCoachResponse(
             documentNumber = lineupCoach.documentNumber,
             age = lineupCoach.age,
             dateOfBirth = lineupCoach.dateOfBirth,
-            photoUrl = lineupCoach.photoUrl
+            photoUrl = lineupCoach.photoUrl,
+            documentFrontUrl = lineupCoach.documentFrontUrl,
+            documentBackUrl = lineupCoach.documentBackUrl
         )
     }
 }

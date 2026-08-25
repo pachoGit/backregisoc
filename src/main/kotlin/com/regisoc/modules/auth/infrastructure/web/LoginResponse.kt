@@ -1,6 +1,6 @@
-package com.regisoc.modules.users.infrastructure.web
+package com.regisoc.modules.auth.infrastructure.web
 
-data class AuthResponse(
+data class LoginResponse(
     val token: String,
     val userId: Long,
     val username: String,

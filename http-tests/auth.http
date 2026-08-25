@@ -1,3 +1,32 @@
+### Login as ADMIN
+# @name loginAdmin
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123"
+}
+
+### Login as CLUB_MANAGER
+# @name loginManager
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "carlos.manager",
+  "password": "manager123"
+}
+
+### Logout (send the token from login response)
+POST http://localhost:8080/api/auth/logout
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "token": "{{token}}"
+}
+
 ### Create an ADMIN user
 POST http://localhost:8080/api/users
 Content-Type: application/json
@@ -27,25 +56,9 @@ Authorization: Bearer {{token}}
   "clubId": 1
 }
 
-### Login as ADMIN
-# @name loginAdmin
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
-
-{
-  "username": "admin",
-  "password": "admin123"
-}
-
-### Login as CLUB_MANAGER
-# @name loginManager
-POST http://localhost:8080/api/auth/login
-Content-Type: application/json
-
-{
-  "username": "carlos.manager",
-  "password": "manager123"
-}
+### Get current logged-in user info
+GET http://localhost:8080/api/auth/me
+Authorization: Bearer {{token}}
 
 ### Get all users (ADMIN only)
 GET http://localhost:8080/api/users

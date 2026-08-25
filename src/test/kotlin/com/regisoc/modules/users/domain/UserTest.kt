@@ -1,10 +1,15 @@
 package com.regisoc.modules.users.domain
 
+import com.regisoc.modules.clubs.domain.Club
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class UserTest {
+
+    private fun createClub(name: String = "Test Club"): Club {
+        return Club(name = name, foundedYear = 2000, createdBy = "admin")
+    }
 
     @Test
     fun `should create user with required fields`() {
@@ -22,12 +27,13 @@ class UserTest {
         assertEquals("12345678", user.documentNumber)
         assertEquals("johndoe", user.username)
         assertEquals(UserRole.ADMIN, user.role)
-        assertNull(user.clubId)
+        assertNull(user.club)
         assertTrue(user.isActive)
     }
 
     @Test
-    fun `should create club manager with clubId`() {
+    fun `should create club manager with club`() {
+        val club = createClub()
         val user = User(
             name = "Jane",
             surname = "Smith",
@@ -35,15 +41,17 @@ class UserTest {
             username = "janesmith",
             password = "hashedPassword",
             role = UserRole.CLUB_MANAGER,
-            clubId = 1L
+            club = club
         )
 
         assertEquals(UserRole.CLUB_MANAGER, user.role)
-        assertEquals(1L, user.clubId)
+        assertNotNull(user.club)
+        assertEquals(club.id, user.club!!.id)
     }
 
     @Test
-    fun `should reject admin with clubId`() {
+    fun `should reject admin with club`() {
+        val club = createClub()
         assertThrows<IllegalArgumentException> {
             User(
                 name = "John",
@@ -52,7 +60,7 @@ class UserTest {
                 username = "johndoe",
                 password = "hashedPassword",
                 role = UserRole.ADMIN,
-                clubId = 1L
+                club = club
             )
         }
     }

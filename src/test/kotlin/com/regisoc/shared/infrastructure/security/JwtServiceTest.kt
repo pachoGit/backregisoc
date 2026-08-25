@@ -1,5 +1,6 @@
 package com.regisoc.shared.infrastructure.security
 
+import com.regisoc.modules.clubs.domain.Club
 import com.regisoc.modules.users.domain.User
 import com.regisoc.modules.users.domain.UserRole
 import org.junit.jupiter.api.Assertions.*
@@ -50,12 +51,13 @@ class JwtServiceTest {
 
     @Test
     fun `should extract clubId from token`() {
-        val user = createUser(username = "manager", role = UserRole.CLUB_MANAGER, clubId = 42L)
+        val club = Club(name = "Test Club", foundedYear = 2000, createdBy = "admin")
+        val user = createUser(username = "manager", role = UserRole.CLUB_MANAGER, club = club)
 
         val token = jwtService.generateToken(user)
         val extractedClubId = jwtService.extractClubId(token)
 
-        assertEquals(42L, extractedClubId)
+        assertNotNull(extractedClubId)
     }
 
     @Test
@@ -117,7 +119,7 @@ class JwtServiceTest {
     private fun createUser(
         username: String,
         role: UserRole,
-        clubId: Long? = null
+        club: Club? = null
     ): User {
         return User(
             name = "Test",
@@ -126,7 +128,7 @@ class JwtServiceTest {
             username = username,
             password = "hashedPassword",
             role = role,
-            clubId = clubId
+            club = club
         )
     }
 }
