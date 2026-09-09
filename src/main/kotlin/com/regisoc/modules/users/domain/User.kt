@@ -96,4 +96,8 @@ class User(
         this.updatedAt = LocalDateTime.now()
         this.deletedAt = LocalDateTime.now()
     }
+
+    fun isAdmin(): Boolean = role == UserRole.ADMIN
+
+    fun isManager(): Boolean = role == UserRole.CLUB_MANAGER
 }

@@ -2,6 +2,7 @@ package com.regisoc.shared.infrastructure.security
 
 import com.regisoc.modules.users.domain.UserRepository
 import com.regisoc.modules.users.domain.UserRole
+import com.regisoc.modules.users.domain.User
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 
@@ -9,6 +10,12 @@ import org.springframework.stereotype.Component
 class CurrentUserHelper(
     private val userRepository: UserRepository
 ) {
+    fun getUser(): User {
+        val username = getCurrentUsername()
+        return userRepository.findByUsername(username)
+            .orElseThrow { IllegalStateException("Authenticated user not found: $username") }
+    }
+
     fun getCurrentUserId(): Long {
         val username = getCurrentUsername()
         val user = userRepository.findByUsername(username)

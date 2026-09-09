@@ -1,6 +1,8 @@
 package com.regisoc.modules.players.infrastructure.web
 
 import com.regisoc.modules.players.application.*
+import com.regisoc.shared.infrastructure.security.CurrentUserHelper
+import com.regisoc.shared.application.ClubAuthorizationHelper
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -15,14 +17,17 @@ class PlayerController(
     private val updatePlayerUseCase: UpdatePlayerUseCase,
     private val getPlayerUseCase: GetPlayerUseCase,
     private val deletePlayerUseCase: DeletePlayerUseCase,
-    private val uploadPlayerPhotosUseCase: UploadPlayerPhotosUseCase
+    private val uploadPlayerPhotosUseCase: UploadPlayerPhotosUseCase,
+    private val currentUserHelper: CurrentUserHelper,
+    private val clubAuthorizationHelper: ClubAuthorizationHelper,
 ) {
     @PostMapping(consumes = [MediaType.APPLICATION_JSON_VALUE])
     fun create(
         @RequestBody @Valid request: CreatePlayerRequest
     ): ResponseEntity<PlayerResponse> {
+        val clubId = clubAuthorizationHelper.resolveEffectiveClubId(request.clubId)
         val command = RegisterPlayerCommand(
-            clubId = request.clubId,
+            clubId = clubId,
             firstName = request.firstName,
             lastName = request.lastName,
             documentNumber = request.documentNumber,

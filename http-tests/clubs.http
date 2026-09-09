@@ -1,10 +1,13 @@
+:token = eyJhbGciOiJIUzM4NCJ9.eyJ1c2VybmFtZSI6ImNhcmxvcy5tYW5hZ2VyIiwicm9sZSI6IkNMVUJfTUFOQUdFUiIsImNsdWJJZCI6MSwic3ViIjoiY2FybG9zLm1hbmFnZXIiLCJpYXQiOjE3ODg4OTc0MjIsImV4cCI6MTc4ODg5OTIyMn0.IWWxY_KHmdvi7hWxmHFcuxJibFzs-W_nGj85Rwx5QMaZGjOvQL1_lsQ6NSqziA5X
+# @token = eyJhbGciOiJIUzM4NCJ9.eyJ1c2VybmFtZSI6ImFkbWluLmFkbWluIiwicm9sZSI6IkFETUlOIiwic3ViIjoiYWRtaW4uYWRtaW4iLCJpYXQiOjE3ODc3NTQzMTEsImV4cCI6MTc4Nzc1NjExMX0.scvjFKNbhJFJOz8bnBU9qQsMuJLiVmfBGVOcY1eUPfpb9n1ggCbJhewKOJmHqO5Z
+
 ### Create a new club (ADMIN only)
 POST http://localhost:8080/api/clubs
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer :token
 
 {
-  "name": "Club Deportivo Municipal",
+  "name": "Club Los mas buenos 3",
   "foundedYear": 1935,
   "crestUrl": "https://imageio.forbes.com/i-forbesimg/media/lists/teams/barcelona_416x416.jpg?format=jpg",
   "description": "Club histórico de la ciudad",

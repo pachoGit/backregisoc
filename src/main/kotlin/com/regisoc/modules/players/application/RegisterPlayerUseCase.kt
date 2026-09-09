@@ -27,7 +27,6 @@ class RegisterPlayerUseCase(
     private val clubRepository: ClubRepository
 ) {
     fun execute(command: RegisterPlayerCommand): Player {
-        println("Entro al caso de uso")
         val club = clubRepository.findById(command.clubId)
             .orElseThrow { EntityNotFoundException("Club not found: ${command.clubId}") }
 

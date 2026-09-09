@@ -1,11 +1,14 @@
+:token = eyJhbGciOiJIUzM4NCJ9.eyJ1c2VybmFtZSI6ImFkbWluLmFkbWluIiwicm9sZSI6IkFETUlOIiwic3ViIjoiYWRtaW4uYWRtaW4iLCJpYXQiOjE3ODc3NTY4NzksImV4cCI6MTc4Nzc1ODY3OX0._t5LmKL1tqd-ncZV2pQrJaRoWdCld461huFQXqDt0gnJscFYHgp7qYZrmn9hcWyH
+:tokenManager = eyJhbGciOiJIUzM4NCJ9.eyJ1c2VybmFtZSI6ImNhcmxvcy5tYW5hZ2VyIiwicm9sZSI6IkNMVUJfTUFOQUdFUiIsImNsdWJJZCI6MSwic3ViIjoiY2FybG9zLm1hbmFnZXIiLCJpYXQiOjE3ODc3NTY4OTgsImV4cCI6MTc4Nzc1ODY5OH0.fmDcxGbnNYvQFvS95rvsK8-LjC6elgD_6SOBiK399WDfKdQSp-TwkSKYAenXxF5s
+
 ### Login as ADMIN
 # @name loginAdmin
 POST http://localhost:8080/api/auth/login
 Content-Type: application/json
 
 {
-  "username": "admin",
-  "password": "admin123"
+  "username": "admin.admin",
+  "password": "admin"
 }
 
 ### Login as CLUB_MANAGER
@@ -15,7 +18,7 @@ Content-Type: application/json
 
 {
   "username": "carlos.manager",
-  "password": "manager123"
+  "password": "manager"
 }
 
 ### Logout (send the token from login response)
@@ -30,7 +33,7 @@ Authorization: Bearer {{token}}
 ### Create an ADMIN user
 POST http://localhost:8080/api/users
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer :token
 
 {
   "name": "Admin",
@@ -44,21 +47,21 @@ Authorization: Bearer {{token}}
 ### Create a CLUB_MANAGER user (associated with club 1)
 POST http://localhost:8080/api/users
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer :token
 
 {
   "name": "Carlos",
   "surname": "Garcia",
   "documentNumber": "87654321",
   "username": "carlos.manager",
-  "password": "manager123",
+  "password": "manager",
   "role": "CLUB_MANAGER",
   "clubId": 1
 }
 
 ### Get current logged-in user info
 GET http://localhost:8080/api/auth/me
-Authorization: Bearer {{token}}
+Authorization: Bearer :tokenManager
 
 ### Get all users (ADMIN only)
 GET http://localhost:8080/api/users

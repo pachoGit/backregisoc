@@ -18,7 +18,7 @@ class GlobalExceptionHandler {
     fun handleNotFound(ex: EntityNotFoundException): ProblemDetail {
         val problem = ProblemDetail.forStatus(HttpStatus.NOT_FOUND)
         problem.title = "Not Found"
-        problem.detail = ex.message ?: "Resource not found"
+        problem.detail = ex.message ?: "Recurso no encontrado"
         problem.type = URI.create("about:blank")
         return problem
     }
@@ -26,7 +26,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException::class)
     fun handleBadArgument(ex: IllegalArgumentException): ProblemDetail {
         val problem = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST)
-        problem.title = "Bad Request"
+        problem.title = "Bad Request personal"
         problem.detail = ex.message ?: "Invalid argument"
         problem.type = URI.create("about:blank")
         return problem
@@ -57,7 +57,7 @@ class GlobalExceptionHandler {
     fun handleAccessDenied(ex: AccessDeniedException): ProblemDetail {
         val problem = ProblemDetail.forStatus(HttpStatus.FORBIDDEN)
         problem.title = "Forbidden"
-        problem.detail = ex.message ?: "Access denied"
+        problem.detail = ex.message ?: "Acceso denegado"
         problem.type = URI.create("about:blank")
         return problem
     }
@@ -65,8 +65,8 @@ class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException::class)
     fun handleBadCredentials(ex: BadCredentialsException): ProblemDetail {
         val problem = ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED)
-        problem.title = "Unauthorized"
-        problem.detail = "Invalid username or password"
+        problem.title = "No autorizado"
+        problem.detail = "Usuario o contraña no válidos"
         problem.type = URI.create("about:blank")
         return problem
     }

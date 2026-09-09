@@ -18,10 +18,10 @@ class LoginUseCase(
         )
 
         val user = userRepository.findByUsername(command.username)
-            .orElseThrow { IllegalArgumentException("Invalid credentials") }
+            .orElseThrow { IllegalArgumentException("Credenciales invalidas") }
 
         if (!user.isActive) {
-            throw IllegalStateException("User account is deactivated")
+            throw IllegalStateException("La cuenta del usuario esta desactivada")
         }
 
         val token = jwtService.generateToken(user)
