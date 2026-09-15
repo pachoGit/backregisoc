@@ -1,3 +1,5 @@
+:token = eyJhbGciOiJIUzM4NCJ9.eyJ1c2VybmFtZSI6ImFkbWluLmFkbWluIiwicm9sZSI6IkFETUlOIiwic3ViIjoiYWRtaW4uYWRtaW4iLCJpYXQiOjE3ODk0ODk4NTIsImV4cCI6MTc4OTQ5MTY1Mn0.gT-1y_LeB2SS2jSHoxs-Y9NarQCcraSAKC8qlnv0D_H7sqqxtjL4NMI9QGCdBp08
+
 ### Create a new event
 POST http://localhost:8080/api/events
 Content-Type: application/json
@@ -43,10 +45,10 @@ Authorization: Bearer {{token}}
 ### Register a club to an event (replace with actual IDs)
 POST http://localhost:8080/api/events/1/registrations
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer :token
 
 {
-  "clubId": 3
+  "clubId": 4
 }
 
 ### Get all registrations for an event (replace with actual event ID)
@@ -54,8 +56,8 @@ GET http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID/registrations
 Authorization: Bearer {{token}}
 
 ### Start an event (only if status is UPCOMING)
-POST http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID/start
-Authorization: Bearer {{token}}
+POST http://localhost:8080/api/events/1/start
+Authorization: Bearer :token
 
 ### Finish an event (only if status is ONGOING)
 POST http://localhost:8080/api/events/REPLACE_WITH_EVENT_ID/finish

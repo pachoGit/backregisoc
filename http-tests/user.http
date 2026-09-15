@@ -1,0 +1,16 @@
+:token = eyJhbGciOiJIUzM4NCJ9.eyJ1c2VybmFtZSI6ImFkbWluLmFkbWluIiwicm9sZSI6IkFETUlOIiwic3ViIjoiYWRtaW4uYWRtaW4iLCJpYXQiOjE3ODk0ODk4NTIsImV4cCI6MTc4OTQ5MTY1Mn0.gT-1y_LeB2SS2jSHoxs-Y9NarQCcraSAKC8qlnv0D_H7sqqxtjL4NMI9QGCdBp08
+
+### Create a new club (ADMIN only)
+POST http://localhost:8080/api/users
+Content-Type: application/json
+Authorization: Bearer :token
+
+{
+  "name": "Julio",
+  "surname": "Diaz",
+  "documentNumber": "76876235",
+  "username": "julio.manager",
+  "password": "manager",
+  "role": "CLUB_MANAGER",
+  "clubId": "4"
+}

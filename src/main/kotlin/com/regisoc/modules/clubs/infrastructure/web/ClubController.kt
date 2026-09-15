@@ -2,6 +2,7 @@ package com.regisoc.modules.clubs.infrastructure.web
 
 import com.regisoc.modules.clubs.application.*
 import com.regisoc.shared.infrastructure.security.CurrentUserHelper
+import com.regisoc.shared.application.ClubAuthorizationHelper
 import org.springframework.security.access.AccessDeniedException
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -15,10 +16,15 @@ class ClubController(
     private val updateClubUseCase: UpdateClubUseCase,
     private val getClubUseCase: GetClubUseCase,
     private val deleteClubUseCase: DeleteClubUseCase,
-    private val currentUserHelper: CurrentUserHelper
+    private val currentUserHelper: CurrentUserHelper,
+    private val clubAuthorizationHelper: ClubAuthorizationHelper
 ) {
     @PostMapping
     fun create(@Valid @RequestBody request: CreateClubRequest): ResponseEntity<ClubResponse> {
+        val user = currentUserHelper.getUser()
+        if (!user.isAdmin()) {
+            throw AccessDeniedException("No tiene permitido realizar esta acción")
+        }
         val command = CreateClubCommand(
             name = request.name,
             foundedYear = request.foundedYear,
@@ -32,6 +38,8 @@ class ClubController(
 
     @PutMapping("/{id}")
     fun update(@PathVariable id: Long, @Valid @RequestBody request: UpdateClubRequest): ResponseEntity<Void> {
+        clubAuthorizationHelper.validateClubAccess(id)
+
         val command = UpdateClubCommand(
             id = id,
             name = request.name,
@@ -45,14 +53,9 @@ class ClubController(
 
     @GetMapping("/{id}")
     fun getById(@PathVariable id: Long): ResponseEntity<ClubResponse> {
-        if (!currentUserHelper.isAdmin()) {
-            val userClubId = currentUserHelper.getCurrentUserClubId()
-                ?: throw AccessDeniedException("User is not associated with any club")
-            if (userClubId != id) {
-                throw AccessDeniedException("You can only access your own club information")
-            }
-        }
+        clubAuthorizationHelper.validateClubAccess(id)
         val club = getClubUseCase.findById(id)
+
         return ResponseEntity.ok(ClubResponse.from(club))
     }
 
@@ -72,6 +75,11 @@ class ClubController(
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long): ResponseEntity<Void> {
+        val user = currentUserHelper.getUser()
+        if (!user.isAdmin()) {
+            throw AccessDeniedException("No tienes permitido realizar esta acción")
+        }
+
         deleteClubUseCase.execute(id)
         return ResponseEntity.noContent().build()
     }
