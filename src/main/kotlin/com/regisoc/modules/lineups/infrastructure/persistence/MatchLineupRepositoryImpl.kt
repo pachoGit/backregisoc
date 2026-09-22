@@ -13,4 +13,5 @@ class MatchLineupRepositoryImpl(
     override fun findAllByMatchId(matchId: Long): List<MatchLineup> = jpaRepository.findAllByMatchId(matchId)
     override fun findByMatchIdAndClubId(matchId: Long, clubId: Long): Optional<MatchLineup> =
         jpaRepository.findByMatchIdAndClubId(matchId, clubId)
+    override fun findById(lineupId: Long) = jpaRepository.findById(lineupId)
 }

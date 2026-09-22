@@ -5,6 +5,7 @@ import com.regisoc.modules.coaches.domain.CoachRepository
 import com.regisoc.modules.lineups.domain.LineupCoach
 import com.regisoc.modules.lineups.domain.LineupPhysicalTrainer
 import com.regisoc.modules.lineups.domain.LineupPlayer
+import com.regisoc.modules.lineups.domain.LineupStatus
 import com.regisoc.modules.lineups.domain.MatchLineup
 import com.regisoc.modules.lineups.domain.MatchLineupRepository
 import com.regisoc.modules.matches.domain.MatchRepository
@@ -64,6 +65,10 @@ class SetLineupUseCase(
 
         val lineup = repository.findByMatchIdAndClubId(match.id, club.id)
             .orElseGet { MatchLineup(match = match, club = club) }
+
+        require(lineup.status == LineupStatus.OPEN) {
+            "Lineup is closed and cannot be modified: ${lineup.id}"
+        }
 
         lineup.setLineup(
             players = players,

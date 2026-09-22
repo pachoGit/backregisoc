@@ -4,6 +4,8 @@ import com.regisoc.modules.matchdates.application.CreateMatchDateCommand
 import com.regisoc.modules.matchdates.application.CreateMatchDateUseCase
 import com.regisoc.modules.matchdates.application.GetMatchDatesByClubUseCase
 import com.regisoc.modules.matchdates.application.GetMatchDatesUseCase
+import com.regisoc.modules.matchdates.application.StartMatchDateCommand
+import com.regisoc.modules.matchdates.application.StartMatchDateUseCase
 import com.regisoc.modules.matches.infrastructure.web.MatchResponse
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
@@ -20,7 +22,8 @@ import org.springframework.web.bind.annotation.RestController
 class MatchDateController(
     private val createMatchDateUseCase: CreateMatchDateUseCase,
     private val getMatchDatesUseCase: GetMatchDatesUseCase,
-    private val getMatchDatesByClubUseCase: GetMatchDatesByClubUseCase
+    private val getMatchDatesByClubUseCase: GetMatchDatesByClubUseCase,
+    private val startMatchDateUseCase: StartMatchDateUseCase
 ) {
     @PostMapping
     fun create(@Valid @RequestBody request: CreateMatchDateRequest): ResponseEntity<MatchDateResponse> {
@@ -32,6 +35,12 @@ class MatchDateController(
         )
         val matchDate = createMatchDateUseCase.execute(command)
         return ResponseEntity.status(HttpStatus.CREATED).body(MatchDateResponse.from(matchDate))
+    }
+
+    @PostMapping("/{id}/start")
+    fun start(@PathVariable id: Long): ResponseEntity<Void> {
+        startMatchDateUseCase.execute(StartMatchDateCommand(id))
+        return ResponseEntity.noContent().build()
     }
 
     @GetMapping("/by-event/{eventId}")

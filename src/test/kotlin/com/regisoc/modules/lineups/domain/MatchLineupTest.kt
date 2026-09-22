@@ -134,6 +134,27 @@ class MatchLineupTest {
     }
 
     @Test
+    fun `should start with an open status`() {
+        val club = createClub()
+        val match = createMatch()
+
+        val lineup = MatchLineup(match = match, club = club)
+
+        assertEquals(LineupStatus.OPEN, lineup.status)
+    }
+
+    @Test
+    fun `should close the lineup`() {
+        val club = createClub()
+        val match = createMatch()
+
+        val lineup = MatchLineup(match = match, club = club)
+        lineup.close()
+
+        assertEquals(LineupStatus.CLOSE, lineup.status)
+    }
+
+    @Test
     fun `should replace the previous lineup data`() {
         val club = createClub()
         val match = createMatch()

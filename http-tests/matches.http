@@ -1,13 +1,15 @@
+:token = eyJhbGciOiJIUzM4NCJ9.eyJ1c2VybmFtZSI6ImFkbWluLmFkbWluIiwicm9sZSI6IkFETUlOIiwic3ViIjoiYWRtaW4uYWRtaW4iLCJpYXQiOjE3ODk0ODk4NTIsImV4cCI6MTc4OTQ5MTY1Mn0.gT-1y_LeB2SS2jSHoxs-Y9NarQCcraSAKC8qlnv0D_H7sqqxtjL4NMI9QGCdBp08
+
 ### Create a match (replace with actual IDs)
 POST http://localhost:8080/api/matches
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer :token
 
 {
   "matchDateId": 1,
   "homeClubId": 1,
-  "awayClubId": 2,
-  "scheduledTime": "2026-03-16T16:00:00"
+  "awayClubId": 4,
+  "scheduledTime": "2026-09-16T16:00:00"
 }
 
 ### Create another match

@@ -3,6 +3,8 @@ package com.regisoc.modules.lineups.infrastructure.web
 import com.regisoc.modules.lineups.application.GetLineupUseCase
 import com.regisoc.modules.lineups.application.SetLineupCommand
 import com.regisoc.modules.lineups.application.SetLineupUseCase
+import com.regisoc.modules.lineups.application.CloseLineupUseCase
+import com.regisoc.modules.lineups.application.CloseLineupCommand
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -13,12 +15,14 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.PutMapping
 
 @RestController
 @RequestMapping("/api/lineups")
 class LineupController(
     private val setLineupUseCase: SetLineupUseCase,
-    private val getLineupUseCase: GetLineupUseCase
+    private val getLineupUseCase: GetLineupUseCase,
+    private val closeLineupUseCase: CloseLineupUseCase,
 ) {
     @PostMapping
     fun setLineup(@Valid @RequestBody request: SetLineupRequest): ResponseEntity<LineupResponse> {
@@ -53,5 +57,12 @@ class LineupController(
     ): ResponseEntity<LineupResponse> {
         val lineup = getLineupUseCase.getClubLineup(matchId, clubId)
         return ResponseEntity.ok(LineupResponse.from(lineup))
+    }
+
+    @PutMapping("/close/{lineupId}")
+    fun close(@PathVariable lineupId: Long): ResponseEntity<Void> {
+        val command = CloseLineupCommand(lineupId = lineupId)
+        closeLineupUseCase.execute(command)
+        return ResponseEntity.noContent().build()
     }
 }

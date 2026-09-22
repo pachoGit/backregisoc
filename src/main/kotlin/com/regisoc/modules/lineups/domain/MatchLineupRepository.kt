@@ -33,4 +33,12 @@ interface MatchLineupRepository {
      * @return Un [Optional] que contiene la plantilla si existe, o vacío si no se encuentra.
      */
     fun findByMatchIdAndClubId(matchId: Long, clubId: Long): Optional<MatchLineup>
+
+    /**
+     * Obtiene una plantilla de la planilla.
+     *
+     * @param lineup Identificador del .
+     * @return La [Optional] plantilla persistida.
+     */
+    fun findById(lineupId: Long): Optional<MatchLineup>
 }

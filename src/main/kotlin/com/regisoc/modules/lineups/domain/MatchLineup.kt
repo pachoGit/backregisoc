@@ -16,7 +16,9 @@ import jakarta.persistence.ManyToOne
 import jakarta.persistence.OrderColumn
 import jakarta.persistence.Table
 import jakarta.persistence.UniqueConstraint
+import jakarta.persistence.Enumerated
 import java.time.LocalDateTime
+import jakarta.persistence.EnumType
 
 /**
  * Entidad que representa la plantilla de un club para un partido.
@@ -34,8 +36,16 @@ import java.time.LocalDateTime
 )
 class MatchLineup(
     match: Match,
-    club: Club
+    club: Club,
+    status: LineupStatus = LineupStatus.OPEN
 ) : BaseEntity() {
+
+    /**
+     *  @property status Estado actual de la planilla ([LineupStatus]).
+     */
+    @Enumerated(EnumType.STRING)
+    var status: LineupStatus = status
+        protected set
 
     /**
      * @property match Partido al que pertenece la plantilla.
@@ -113,6 +123,11 @@ class MatchLineup(
         this.players = players.toMutableList()
         this.coach = coach
         this.physicalTrainer = physicalTrainer
+        this.updatedAt = LocalDateTime.now()
+    }
+
+    fun close() {
+        this.status = LineupStatus.CLOSE
         this.updatedAt = LocalDateTime.now()
     }
 }

@@ -45,3 +45,7 @@ Authorization: Bearer {{token}}
 ### Get lineup for a specific club in a match (replace with actual IDs)
 GET http://localhost:8080/api/lineups/match/1/club/1
 Authorization: Bearer {{token}}
+
+### Close a lineup (replace with actual lineup ID)
+PUT http://localhost:8080/api/lineups/close/1
+Authorization: Bearer {{token}}

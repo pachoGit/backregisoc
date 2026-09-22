@@ -1,5 +1,6 @@
 package com.regisoc.modules.lineups.infrastructure.web
 
+import com.regisoc.modules.lineups.domain.LineupStatus
 import com.regisoc.modules.lineups.domain.MatchLineup
 import java.time.LocalDateTime
 
@@ -7,6 +8,7 @@ data class LineupResponse(
     val id: Long,
     val matchId: Long,
     val clubId: Long,
+    val status: LineupStatus,
     val players: List<LineupPlayerResponse>,
     val coach: LineupCoachResponse?,
     val physicalTrainer: LineupPhysicalTrainerResponse?,
@@ -18,6 +20,7 @@ data class LineupResponse(
             id = lineup.id,
             matchId = lineup.match.id,
             clubId = lineup.club.id,
+            status = lineup.status,
             players = lineup.players.map { LineupPlayerResponse.from(it) },
             coach = lineup.coach?.let { LineupCoachResponse.from(it) },
             physicalTrainer = lineup.physicalTrainer?.let { LineupPhysicalTrainerResponse.from(it) },
