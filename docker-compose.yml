@@ -1,0 +1,52 @@
+# Desarrollo local: MySQL en Docker + app con Gradle (recomendado),
+# o stack completo en Docker.
+#
+# 1) Solo la base de datos:   docker compose up -d db
+#     + app fuera de docker:  ./gradlew bootRunLocal   (BD `regisoc`)
+#                             ./gradlew bootRunDev     (BD `regisoc_dev`)
+# 2) Todo en Docker:          docker compose up --build  (perfil local)
+name: regisoc
+
+services:
+  db:
+    image: mysql:8.4
+    container_name: regisoc-mysql
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-secret}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-regisoc}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD:-secret}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+  app:
+    build: .
+    container_name: regisoc-app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      # Dentro de compose el host de MySQL es `db`, no `localhost`.
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-local}
+      DB_URL: jdbc:mysql://db:3306/${MYSQL_DATABASE:-regisoc}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      DB_USERNAME: root
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:-secret}
+      SERVER_PORT: 8080
+      PORT: 8080
+    ports:
+      - "${SERVER_PORT:-8080}:8080"
+
+volumes:
+  mysql-data:

@@ -1,0 +1,17 @@
+.git
+.gitignore
+.gradle/
+.kotlin/
+build/
+out/
+.idea/
+*.iml
+*.class
+Dockerfile
+docker-compose*.yml
+.env
+h2.mv.db
+h2.trace.db
+*.log
+README.md
+http-tests/

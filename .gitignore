@@ -4,10 +4,14 @@
 .gradle/*
 *.gradle/*
 **/build/
+out/
 xcuserdata
 !src/**/build/
 local.properties
-.idea
+# IntelliJ: ignorar todo salvo las Run Configurations compartidas
+.idea/*
+!.idea/runConfigurations/
+!.idea/.gitignore
 .DS_Store
 captures
 .externalNativeBuild
@@ -19,3 +23,13 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 node_modules/
+
+# Entornos y secretos (ver .env.example)
+.env
+!.env.example
+
+# Bases de datos locales H2 / MySQL
+*.mv.db
+*.trace.db
+h2.mv.db
+mysql-data/

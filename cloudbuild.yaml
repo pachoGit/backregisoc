@@ -1,0 +1,60 @@
+# Despliegue en Google Cloud (Cloud Build + Cloud Run + Cloud SQL).
+# Requiere: Artifact Registry, Cloud Run API y Secret Manager habilitados.
+#
+# Uso:
+#   gcloud builds submit --config=cloudbuild.yaml \
+#     --substitutions=_REGION=europe-west1,_REPO=regisoc-repo,_SERVICE=regisoc,_DB_URL="jdbc:mysql://<CLOUD_SQL_IP>:3306/regisoc?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true"
+#
+# Secretos esperados en Secret Manager (mismo proyecto):
+#   regisoc-db-username  -> usuario de Cloud SQL
+#   regisoc-db-password  -> password de Cloud SQL
+#   regisoc-jwt-secret   -> secreto JWT en base64 (>= 256 bits, ej. `openssl rand -base64 48`)
+#
+# Si usas conector Cloud SQL unix-socket, ajusta _DB_URL al socket:
+#   jdbc:mysql:///<DB>?cloudSqlInstance=<PROJECT>:<REGION>:<INSTANCE>&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false
+#   (añade la dependencia cloud-sql-connector en ese caso).
+substitutions:
+  _REGION: europe-west1
+  _REPO: regisoc-repo
+  _SERVICE: regisoc
+  _DB_URL: jdbc:mysql://localhost:3306/regisoc?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+
+steps:
+  # 1) Construir imagen
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$SHORT_SHA
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:latest
+      - .
+
+  # 2) Publicar imagen
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$SHORT_SHA
+
+  # 3) Desplegar en Cloud Run (stateless, health check en /actuator/health)
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    entrypoint: gcloud
+    args:
+      - run
+      - deploy
+      - ${_SERVICE}
+      - --image=${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$SHORT_SHA
+      - --region=${_REGION}
+      - --platform=managed
+      - --allow-unauthenticated
+      - --port=8080
+      - --set-env-vars=SPRING_PROFILES_ACTIVE=prod,DB_URL=${_DB_URL}
+      - --set-secrets=DB_USERNAME=regisoc-db-username:latest,DB_PASSWORD=regisoc-db-password:latest,JWT_SECRET=regisoc-jwt-secret:latest
+      - --add-cloudsql-instances=$PROJECT_ID:${_REGION}:regisoc-db
+
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:$SHORT_SHA
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/${_REPO}/${_SERVICE}:latest
+
+options:
+  logging: CLOUD_LOGGING_ONLY

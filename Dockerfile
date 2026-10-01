@@ -1,0 +1,39 @@
+# Imagen lista para Google Cloud Run (stateless, escucha en $PORT).
+# Build: docker build -t regisoc .
+# Run:   docker run -p 8080:8080 --env-file .env regisoc
+ARG JAVA_VERSION=21
+
+# ---------- build ----------
+FROM eclipse-temurin:${JAVA_VERSION}-jdk AS build
+WORKDIR /workspace
+
+# Copiamos primero los descriptores para aprovechar la caché de capas.
+COPY gradlew settings.gradle.kts build.gradle.kts gradle.properties ./
+COPY gradle ./gradle
+RUN chmod +x gradlew
+# Descarga dependencias (capa cacheable).
+RUN ./gradlew dependencies --no-daemon || true
+
+COPY src ./src
+RUN ./gradlew bootJar -x test --no-daemon
+
+# ---------- runtime ----------
+FROM eclipse-temurin:${JAVA_VERSION}-jre AS runtime
+WORKDIR /app
+
+# Usuario no-root (buena práctica en Cloud Run / GKE).
+RUN useradd -m -u 10001 appuser
+USER appuser
+
+COPY --from=build /workspace/build/libs/*.jar /app/app.jar
+
+# Cloud Run inyecta PORT; por defecto 8080 en local.
+ENV PORT=8080 \
+    SPRING_PROFILES_ACTIVE=prod
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
+  CMD java -e "System.exit(0)" || wget -qO- http://localhost:${PORT:-8080}/actuator/health | grep -q '"status":"UP"' || exit 1
+
+ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -jar /app/app.jar --spring.profiles.active=${SPRING_PROFILES_ACTIVE:-prod}"]
