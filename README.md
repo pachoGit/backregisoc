@@ -92,6 +92,23 @@ docker compose down -v          # parar y borrar datos
 
 Dentro de Compose la app usa el host `db` (`DB_URL=jdbc:mysql://db:3306/...`); fuera de Compose usa `localhost`.
 
+## Despliegue en Railway (desde GitHub)
+
+1. Sube el repo a GitHub (`git push`) con estos ficheros incluidos: `Dockerfile`, `railway.json`, `src/main/resources/application-prod.yml`.
+2. En Railway: **New Project ▶ Deploy from GitHub** y elige el repo. Railway detecta el `Dockerfile` y compila solo (`railway.json` ya fija builder `DOCKERFILE` y health check en `/actuator/health`).
+3. Añade la base de datos: **New ▶ Database ▶ MySQL**. Railway inyecta automáticamente `MYSQLHOST`, `MYSQLPORT`, `MYSQLDATABASE`, `MYSQLUSER` y `MYSQLPASSWORD` en los servicios del proyecto: la app los usa sin configurar nada más.
+4. En el servicio de la app (**Variables**), añade solo:
+   | Variable | Valor |
+   |---|---|
+   | `SPRING_PROFILES_ACTIVE` | `prod` |
+   | `JWT_SECRET` | secreto base64 ≥256 bits (`openssl rand -base64 48`) |
+   | `JWT_EXPIRATION` | `1800000` (opcional) |
+   
+   No definas `DB_URL`: con el plugin MySQL presente se arma la URL JDBC desde las `MYSQL*`. `PORT` lo pone Railway solo.
+5. Cada `git push` a la rama conectada redespliega automáticamente. Flyway migra el esquema al arrancar.
+
+Para un ambiente `dev` en Railway, crea otro proyecto/servicio igual pero apuntando a otra BD (o a otro servicio MySQL).
+
 ## Despliegue en Google Cloud
 
 Imagen multi-stage lista para Cloud Run (`Dockerfile`): escucha en `$PORT`, corre como no-root y expone `/actuator/health`.

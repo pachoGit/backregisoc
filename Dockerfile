@@ -1,4 +1,5 @@
-# Imagen lista para Google Cloud Run (stateless, escucha en $PORT).
+# Imagen lista para plataformas container (Google Cloud Run, Railway).
+# Escucha en $PORT (inyectado por la plataforma) y expone /actuator/health.
 # Build: docker build -t regisoc .
 # Run:   docker run -p 8080:8080 --env-file .env regisoc
 ARG JAVA_VERSION=21
@@ -27,13 +28,13 @@ USER appuser
 
 COPY --from=build /workspace/build/libs/*.jar /app/app.jar
 
-# Cloud Run inyecta PORT; por defecto 8080 en local.
+# La plataforma inyecta PORT; por defecto 8080 en local.
 ENV PORT=8080 \
     SPRING_PROFILES_ACTIVE=prod
 
 EXPOSE 8080
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
-  CMD java -e "System.exit(0)" || wget -qO- http://localhost:${PORT:-8080}/actuator/health | grep -q '"status":"UP"' || exit 1
+# Sin HEALTHCHECK de Docker: el health check lo hace la plataforma
+# (Cloud Run / Railway) contra /actuator/health (ver railway.json).
 
 ENTRYPOINT ["sh", "-c", "exec java $JAVA_OPTS -jar /app/app.jar --spring.profiles.active=${SPRING_PROFILES_ACTIVE:-prod}"]

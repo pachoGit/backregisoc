@@ -55,7 +55,6 @@ kotlin {
 
 tasks.withType<Test> {
     useJUnitPlatform()
-    // Los tests son unitarios con mocks (no levantan Spring ni necesitan BD).
 }
 
 // Perfil por defecto para `bootRun`: local. Se respeta SPRING_PROFILES_ACTIVE si ya viene definida.
