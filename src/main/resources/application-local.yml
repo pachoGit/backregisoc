@@ -1,11 +1,11 @@
-# Entorno LOCAL: desarrollo en tu máquina con MySQL (docker-compose) o H2.
+# Entorno LOCAL: desarrollo en tu máquina con MySQL (docker-compose).
 # Uso:
 #   ./gradlew bootRunLocal            -> MySQL localhost:3306 (ver docker-compose.yml)
 #   SPRING_PROFILES_ACTIVE=local ./gradlew bootRun
 spring:
   datasource:
     url: ${DB_URL:jdbc:mysql://localhost:3306/regisoc?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true}
-    username: ${DB_USERNAME:${DB_USER:root}}
+    username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:}
     driver-class-name: ${DB_DRIVER:com.mysql.cj.jdbc.Driver}
   jpa:
